@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+
+  </head>
+  <body>
+
+    <div class="container">
+      <input id="txtEmail" type="email" placeholder="Email">
+      <input id="txtPassword" type="password" placeholder="Password">
+
+      <button type="button" id="loginButton" class="btn btn-primary">Login</button>
+
+      <button type="button" id="signUpButton" class="btn btn-success">Sign Up</button>
+
+      <button type="button" id="logOutButton" class="btn btn-danger hide">Log Out</button>
+    </div>
+
+    <div class="container">
+      <h1>Current user: </h1>
+      <h3 id="User"></h3>
+
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
