@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Welcome to Firebase Hosting</title>
+    <title>Employee Time Tracker</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -18,9 +18,7 @@
   <body>
     <div class="container">
       <div class="logo">
-        <p id="work">work</p>
-        <img src="img/time.png" alt=logo width="75"/>
-        <p id="time">time</p>
+        <p id="logo">work <span><img id="time"src="img/time.png" width="60"/></span> time</p> 
       </div>
 
       <div class="form-group">
@@ -29,15 +27,12 @@
       </div>
 
       <button type="button" id="loginButton" class="btn btn-custom">login</button>
-      <button type="button" id="signUpButton" class="btn btn-custom">sign up</button>
+      <button type="button" id="signUpButton" class="btn btn-link">sign up</button>
       <button type="button" id="logOutButton" class="btn btn-danger hide">Log Out</button>
-    </div>
 
-    <div class="container">
-      <h1>Current user: </h1>
-      <h3 id="User"></h3>
+      <h3>Current user: </h3>
+      <h4 id="User"></h4>
     </div>
-
     <script src="app.js"></script>
   </body>
 </html>

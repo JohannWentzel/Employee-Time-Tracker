@@ -1,11 +1,11 @@
 body {
   font-family: Roboto, Arial, sans-serif;
   background: #DFA3EA;
-  color: #FFF
+  color: #FFF;
 }
 
 a {
-  color: rgb(3,155,229);
+  color: #FFF;
 }
 
 .center-block() {
@@ -17,7 +17,7 @@ a {
 .container {
   .center-block();
   text-align: center;
-  margin-top: 10%;
+  margin-top: 15%;
   width: 25%;
 }
 
@@ -34,7 +34,7 @@ a {
   background-image: -o-linear-gradient(top, #1ee1ff, #00b0cc);
   background-image: linear-gradient(#1ee1ff, #00b0cc);
   border-color: #00b0cc #00b0cc hsl(188, 100%, 36%);
-  color: #fff !important;
+  color: #FFF !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -54,7 +54,7 @@ a {
   margin-top: 15px;
 }
 
-#loginButton{
+#loginButton {
   font-size: 18px;
   font-weight: 800;
   height: 45px;
@@ -64,64 +64,10 @@ a {
   width: 100%;
 }
 
-#signUpButton{
-  font-weight: 800;
-  width: 50%;
+#signUpButton {
+  color: #FFF;
 }
 
-#time{
-  float: right;
-  margin-right: 100px;
-  margin-top: 25px;
+#logo {
+  font-size: 18px;
 }
-
-#work {
-  float: left;
-  margin-left: 100px;
-  margin-top: 25px;
-}
-
-/* 
-#message {
-  max-width: 400px;
-  margin: 40px auto;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
-  border-radius: 2px;
-  background: white;
-  padding: 16px 24px;
-}
-
-#message h1 {
-  font-size: 22px;
-  font-weight: 500;
-  text-align: center;
-  margin: 0 0 16px;
-}
-
-#message p {
-  font-weight: 300;
-  line-height: 150%;
-}
-
-#message ul {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  text-align: center;
-}
-
-#message li a {
-  display: inline-block;
-  padding: 8px;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: 500;
-  background: rgb(3,155,229);
-  color: white;
-  border: 1px solid rgb(3,155,229);
-  border-radius: 3px;
-  font-size: 14px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-}
-
-*/
