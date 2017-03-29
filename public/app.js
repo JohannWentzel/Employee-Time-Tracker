@@ -8,8 +8,10 @@
     storageBucket: "employee-time-tracking-b561d.appspot.com",
     messagingSenderId: "195814535649"
   };
+
   firebase.initializeApp(config);
-  //TESTING REALTIME DATABASE
+
+  // TESTING REALTIME DATABASE
   // var BigOne = document.getElementById('Greetings');
   // var dbRef = firebase.database().ref().child('Employee').child('hAymr6CBameiJT6BlkofnYYChSi1').child('name');
   // dbRef.on('value', snap => Greetings.innerText = snap.val());
@@ -23,29 +25,21 @@
   const showUser = document.getElementById('User');
 
   // Add login event
-
   btnLogin.addEventListener('click', e => {
+    // Get email and password values
+    const email = txtEmail.value;
+    const password = txtPassword.value;
+    const auth = firebase.auth();
+    console.log(email);
+    console.log(password);
 
-      // Get email and password values
-      const email = txtEmail.value;
-      //console.log(email);
-      const password = txtPassword.value;
-      //console.log(password);
-      const auth = firebase.auth();
-
-      //Sign In
-      const promise = auth.signInWithEmailAndPassword(email,password);
-      promise.catch(e => console.log(e.message));
-
-
+    // Sign In
+    const promise = auth.signInWithEmailAndPassword(email,password);
+    promise.catch(e => console.log(e.message));
   });
 
   btnLogOut.addEventListener('click', e =>{
-
     firebase.auth().signOut();
-
-
-
   });
 
   firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -57,8 +51,5 @@
       btnLogOut.classList.add('hide');
       showUser.innerText = 'No user.';
     }
-
-
   });
-
 }());
