@@ -16,7 +16,7 @@
   // var dbRef = firebase.database().ref().child('Employee').child('hAymr6CBameiJT6BlkofnYYChSi1').child('name');
   // dbRef.on('value', snap => Greetings.innerText = snap.val());
 
-  //Get UI element references
+  // Get UI element references
   const txtEmail = document.getElementById('txtEmail');
   const txtPassword = document.getElementById('txtPassword');
   const btnLogin = document.getElementById('loginButton');
@@ -45,7 +45,7 @@
   });
 
   // Display the sign-up form 
-  btnSignUp.addEventListener('click', e => {
+  btnSignUp.addEventListener('click', f => {
     btnLogin.classList.add('hide');
     btnSignUp.classList.add('hide');
     btnCancel.classList.remove('hide');
@@ -53,7 +53,7 @@
   });
 
   // Display the login form
-  btnCancel.addEventListener('click', e => {
+  btnCancel.addEventListener('click', f => {
     btnLogin.classList.remove('hide');
     btnSignUp.classList.remove('hide');
     btnCancel.classList.add('hide');
@@ -69,8 +69,10 @@
     promise.catch(e => console.log(e.message));
   });
 
+  // Log out button listener
   btnLogOut.addEventListener('click', e => {
-    firebase.auth().signOut();
+    const promise = firebase.auth().signOut();
+    promise.catch(e => console.log(e.message));
   });
 
   // Firebase authentication listener

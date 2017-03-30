@@ -1,6 +1,6 @@
 body {
   font-family: Roboto, Arial, sans-serif;
-  background: #DFA3EA;
+  background: #EAB5FB;
   color: #FFF;
 }
 
@@ -22,7 +22,7 @@ a {
 }
 
 /* courtesy: http://charliepark.org/bootstrap_buttons/ */
-.btn-custom {
+.btn-custom-blue {
   background-color: hsl(188, 100%, 40%) !important;
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1ee1ff", endColorstr="#00b0cc");
@@ -38,6 +38,21 @@ a {
   -webkit-font-smoothing: antialiased;
 }
 
+.btn-custom-purp {
+  background-color: hsl(285, 91%, 81%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eab5fb", endColorstr="#e4a2fa");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#eab5fb), to(#e4a2fa));
+  background-image: -moz-linear-gradient(top, #eab5fb, #e4a2fa);
+  rackground-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eab5fb), color-stop(100%, #e4a2fa));
+  background-image: -webkit-linear-gradient(top, #eab5fb, #e4a2fa);
+  background-image: -o-linear-gradient(top, #eab5fb, #e4a2fa);
+  background-image: linear-gradient(#eab5fb, #e4a2fa);
+  border-color: #e4a2fa #e4a2fa hsl(285, 91%, 80%);
+  color: #FFF !important;
+  -webkit-font-smoothing: antialiased;
+}
+
 .form-control {
   border: none;
   border-radius: 25px;
@@ -45,7 +60,7 @@ a {
 }
 
 .navbar {
-  background-color: #71B5DE;
+  background-color: #10CBE8;
   visibility: hidden;
 }
 
@@ -89,8 +104,13 @@ a {
 }
 
 #logOutButton {
+  background-color: #EF5350;
   position: absolute;
   right: 10px;
+}
+
+#logOutButton:hover {
+  background-color: #E53935;
 }
 
 #navbar-ul li a {
