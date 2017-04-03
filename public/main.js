@@ -15,7 +15,7 @@ firebase.initializeApp(config);
 //  const btnLogin = document.getElementById('loginButton');
 //  const btnSubmit = document.getElementById('submitButton');
 const btnLogOut = document.getElementById('logOutButton');
-const showUser = document.getElementById('User');
+const showUser = document.getElementById('userEmail');
 const navbar = document.getElementById('navbar');
 
 firebase.auth().onAuthStateChanged(user => {
@@ -25,7 +25,7 @@ firebase.auth().onAuthStateChanged(user => {
 		btnLogOut.classList.remove('hide');
 		navbar.style.visibility = "visible";
 	} else {
-		console.log("No user is logged in. How did you do that?");
+		window.location.href = "index.html";
 	}
 });
 
@@ -34,3 +34,8 @@ btnLogOut.addEventListener('click', e => {
 	firebase.auth().signOut();
 	window.location.href = "index.html";
 });
+
+// Initialize the DHTMLX scheduler
+function init() {
+	scheduler.init('scheduler_here',new Date(),"month");
+}
