@@ -67,6 +67,11 @@ btnSubmit.addEventListener('click', e => {
   const password = txtPassword.value;
   const confirmPassword = txtConfirmPassword.value;
 
+  if (areNull(email, password, confirmPassword)) {
+    alertMsg.innerHTML = "<strong>Stop!</strong> One or more of your fields are empty.";
+    $('#loginAlert').show();
+  }
+
   if (password != confirmPassword) {
     alertMsg.innerHTML = "<strong>Uhoh!</strong> Passwords do not match.";
     $('#loginAlert').show();
@@ -104,3 +109,15 @@ formGroup.addEventListener('keypress', e => {
     }
 	}
 });
+
+// Check if any fields are empty
+function areNull(){
+  var len = arguments.length;
+  for (var i = 1; i < len; i++) {
+    if (arguments[i] === null) {
+       return false;
+    }
+  }
+  return true;
+}
+
