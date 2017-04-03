@@ -2,10 +2,10 @@ body {
   background: #EAB5FB;
   color: #FFF;
   font-family: Roboto, Arial, sans-serif;
-	height: 100%;
-	margin: 0px;
-	overflow: hidden;
-	padding: 0px;
+  height: 100%;
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
 }
 
 a {
@@ -57,9 +57,9 @@ a {
 }
 
 .buttons {
-	display: grid;
-	max-width: 400px;
-	margin: 0 auto;	
+  display: grid;
+  max-width: 400px;
+  margin: 0 auto;	
 }
 
 .form-control {
@@ -69,8 +69,8 @@ a {
 }
 
 .form-group * {
-	max-width: 400px;
-	margin: 0 auto;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .main {
@@ -78,20 +78,20 @@ a {
 }
 
 .navbar {
-	align-items: center;
+  align-items: center;
   background-color: #10CBE8;
-	display: flex;
-	margin: 0;
+  display: flex;
+  margin: 0;
 }
 
 .navbar ul {
-	float: left;
+  float: left;
   list-style-type: none;
   margin: 0;
   padding: 10px;
-	padding-left: 10%;
+  padding-left: 10%;
   text-align: center;
-	width: 90%;
+  width: 90%;
 }
 
 .navbar li {
@@ -113,8 +113,8 @@ a {
 }
 
 #loginAlert {
-	max-width: 400px;
-	margin: 0 auto; 
+  max-width: 400px;
+  margin: 0 auto; 
 }
 
 #loginButton {
@@ -131,9 +131,9 @@ a {
 }
 
 #logOutButton {
-	background-color: #EF5350;
-	height: 40px;
-	float: right;
+  background-color: #EF5350;
+  height: 40px;
+  float: right;
 }
 
 #logOutButton:hover {
@@ -144,7 +144,7 @@ a {
   border-radius: 5px;
   font-size: 18px;
   font-weight: 800;
-	height: 40px;
+  height: 40px;
   margin: auto 2%;
 }
 
@@ -162,7 +162,7 @@ a {
 }
 
 #userEmail {
-	float: right;
-	margin-right: 10px;
+  float: right;
+  margin-right: 10px;
 }
 

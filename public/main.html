@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Time Tracker</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -12,38 +12,38 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Firebase JS -->
     <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
-		<!-- Styling -->
+    <!-- Styling -->
     <link rel="stylesheet" href="style.css">
-		<!-- DHTMLX -->
-		<script src="/codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" href="/codebase/dhtmlxscheduler.css" type="text/css" charset="utf-8">
+    <!-- DHTMLX -->
+    <script src="/codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="/codebase/dhtmlxscheduler.css" type="text/css" charset="utf-8">
   </head>
-	<!-- On load, initialize the DHTMLX Scheduler -->
-	<body class="main" onload="init();">
+  <!-- On load, initialize the DHTMLX Scheduler -->
+  <body class="main" onload="init();">
     <div class="navbar" id="navbar">
       <ul id="navbar-ul">
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> PROJECTS</a></li>
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> EMPLOYEES</a></li>
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> APPROVALS</a></li>
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> SETTINGS</a></li>
+	<li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> PROJECTS</a></li>
+	<li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> EMPLOYEES</a></li>
+	<li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> APPROVALS</a></li>
+	<li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> SETTINGS</a></li>
       </ul>
-			<div><span id="userEmail"></span></div>
-			<div><button type="button" id="logOutButton" class="btn btn-danger hide"><span class="glyphicon glyphicon-log-out"></button></div>
+      <div><span id="userEmail"></span></div>
+      <div><button type="button" id="logOutButton" class="btn btn-danger hide"><span class="glyphicon glyphicon-log-out"></button></div>
     </div>
-		<!-- Begin DHTMLX Scheduler -->
-		<div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:500px; padding:10px;'>
-			<div class="dhx_cal_navline">
-				<div class="dhx_cal_prev_button">&nbsp;</div>
-				<div class="dhx_cal_next_button">&nbsp;</div>
-				<div class="dhx_cal_today_button"></div>
-				<div class="dhx_cal_date"></div>
-				<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-				<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-				<div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
-			</div>
-			<div class="dhx_cal_header"></div>
-			<div class="dhx_cal_data"></div>       
-		</div>
+    <!-- Begin DHTMLX Scheduler -->
+    <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:500px; padding:10px;'>
+      <div class="dhx_cal_navline">
+	<div class="dhx_cal_prev_button">&nbsp;</div>
+	<div class="dhx_cal_next_button">&nbsp;</div>
+	<div class="dhx_cal_today_button"></div>
+	<div class="dhx_cal_date"></div>
+	<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+	<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+	<div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+      </div>
+      <div class="dhx_cal_header"></div>
+      <div class="dhx_cal_data"></div>       
+    </div>
   </body>
-	<script  src="main.js"></script>
+  <script  src="main.js"></script>
 </html>

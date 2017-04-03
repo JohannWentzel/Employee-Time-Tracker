@@ -1,9 +1,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Time Tracker</title>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- jQuery library -->
@@ -18,29 +17,29 @@
   <body>
     <div class="container">
       <div class="logo">
-        <p id="logo">work <span><img id="time"src="img/time.png" width="60"/></span> time</p> 
+	<p id="logo">work <span><img id="time"src="img/time.png" width="60"/></span> time</p> 
       </div>
 
       <div class="form-group">
-        <input type="email" id="txtEmail" class="form-control" placeholder="email">
-        <input type="password" id="txtPassword" class="form-control" placeholder="password">
+	<input type="email" id="txtEmail" class="form-control" placeholder="email">
+	<input type="password" id="txtPassword" class="form-control" placeholder="password">
       </div>
 
-			<div class="buttons">
-				<button type="button" id="loginButton" class="btn btn-custom-blue">login</button>
-				<button type="button" id="submitButton" class="btn btn-custom-blue hide">submit</button>
-				<button type="button" id="signUpButton" class="btn btn-link">sign up</button>
-				<button type="button" id="cancelButton" class="btn btn-link hide">cancel</button>
-			</div>
+      <div class="buttons">
+	<button type="button" id="loginButton" class="btn btn-custom-blue">login</button>
+	<button type="button" id="submitButton" class="btn btn-custom-blue hide">submit</button>
+	<button type="button" id="signUpButton" class="btn btn-link">sign up</button>
+	<button type="button" id="cancelButton" class="btn btn-link hide">cancel</button>
+      </div>
 
-			<div id="loginAlert" class="alert alert-danger alert-dismissible" style="display:none">
-				<button id="loginAlertButton" type="button" class="close" data-hide="#loginAlert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<strong>Whoops!</strong> Invalid login credentials.
-			</div>
+      <div id="loginAlert" class="alert alert-danger alert-dismissible" style="display:none">
+	<button id="loginAlertButton" type="button" class="close" data-hide="#loginAlert" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+	<strong>Whoops!</strong> Invalid login credentials.
+      </div>
 
-		</div>
+    </div>
     <script src="login.js"></script>
   </body>
 </html>
