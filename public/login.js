@@ -7,12 +7,10 @@ var config = {
   messagingSenderId: "195814535649"
 };
 
+// Create & initializes the Firebase app instance
 firebase.initializeApp(config);
 
-// TESTING REALTIME DATABASE
-// var BigOne = document.getElementById('Greetings');
 // var dbRef = firebase.database().ref().child('Employee').child('hAymr6CBameiJT6BlkofnYYChSi1').child('name');
-// dbRef.on('value', snap => Greetings.innerText = snap.val());
 
 // Get UI element references
 const txtEmail = document.getElementById('txtEmail');
@@ -26,6 +24,7 @@ const navbar = document.getElementById('navbar');
 const formGroup = document.getElementById('form-group');
 const alertMsg = document.getElementById('alertMsg');
 
+// Focus cursor
 txtEmail.focus();
 
 // Add login event
@@ -89,7 +88,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     console.log(firebaseUser);
     window.location.href = "main.html";
   } else {
-    console.log(firebaseUser);
+      console.log(firebaseUser);
   }
 });
 

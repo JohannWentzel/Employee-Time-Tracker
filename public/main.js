@@ -7,17 +7,37 @@ var config = {
   messagingSenderId: "195814535649"
 };
 
+// Create & initializes the Firebase app instance
 firebase.initializeApp(config);
 
-//Get UI element references
-//  const txtEmail = document.getElementById('txtEmail');
-//  const txtPassword = document.getElementById('txtPassword');
-//  const btnLogin = document.getElementById('loginButton');
-//  const btnSubmit = document.getElementById('submitButton');
+// Get a reference to the database service
+var database = firebase.database();
+
+// Create database references for JSON children
+var dbEvents = database.ref().child('Events');
+var dbEmployee = database.ref().child('Employee/1Oe26Rls1sWzDyuOVEzY3IKxMG42'); // TODO: pull the current logged-in user
+
+// Read the Events from Firebase
+dbEvents.on('value', snapshot => {
+  console.log(snapshot.val());
+  scheduler.firebase(dbEvents); // Set events to the scheduler
+});
+
+// More testing..
+dbEmployee.once("value").then( snapshot => {
+  var name = snapshot.child("name").val();
+  var type = snapshot.child("type").val(); 
+// TODO:  var email = snapshot.child("email").val();
+  console.log(name);
+  console.log(type);
+});
+
+// Get UI element references
 const btnLogOut = document.getElementById('logOutButton');
 const showUser = document.getElementById('userEmail');
 const navbar = document.getElementById('navbar');
 
+// Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     console.log(user);
@@ -25,7 +45,7 @@ firebase.auth().onAuthStateChanged(user => {
     btnLogOut.classList.remove('hide');
     navbar.style.visibility = "visible";
   } else {
-    window.location.href = "index.html";
+      window.location.href = "index.html";
   }
 });
 
@@ -39,3 +59,4 @@ btnLogOut.addEventListener('click', e => {
 function init() {
   scheduler.init('scheduler_here',new Date(),"month");
 }
+
