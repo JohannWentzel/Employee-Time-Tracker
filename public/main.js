@@ -45,14 +45,14 @@ firebase.auth().onAuthStateChanged(user => {
     btnLogOut.classList.remove('hide');
     navbar.style.visibility = "visible";
   } else {
-      window.location.href = "index.html";
+      window.location.href = "login.html";
   }
 });
 
 // Log out event
 btnLogOut.addEventListener('click', e => {
   firebase.auth().signOut();
-  window.location.href = "index.html";
+  window.location.href = "login.html";
 });
 
 // Initialize the DHTMLX scheduler
