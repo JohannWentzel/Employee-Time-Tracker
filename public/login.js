@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
 const txtConfirmPassword = document.getElementById('txtConfirmPassword');
+const typeSelect = document.getElementById('typeSelect');
 const btnLogin = document.getElementById('loginButton');
 const btnSubmit = document.getElementById('submitButton');
 const btnSignUp = document.getElementById('signUpButton');
@@ -49,6 +50,7 @@ btnSignUp.addEventListener('click', f => {
   btnCancel.classList.remove('hide');
   btnSubmit.classList.remove('hide');
   txtConfirmPassword.classList.remove('hide');
+  typeSelect.classList.remove('hide');
 });
 
 // Display the login form
@@ -58,6 +60,7 @@ btnCancel.addEventListener('click', f => {
   btnCancel.classList.add('hide');
   btnSubmit.classList.add('hide');
   txtConfirmPassword.classList.add('hide');
+  typeSelect.classList.add('hide');
 });
 
 // Create a new user - upon creation, the user is logged in
@@ -65,10 +68,15 @@ btnSubmit.addEventListener('click', e => {
   const email = txtEmail.value;
   const password = txtPassword.value;
   const confirmPassword = txtConfirmPassword.value;
+  const type = typeSelect.value;
+  console.log(type);
 
-  if (areNull(email, password, confirmPassword)) {
+  var fields = [email, password, confirmPassword];
+
+  if (areNull(fields)) {
     alertMsg.innerHTML = "<strong>Stop!</strong> One or more of your fields are empty.";
     $('#loginAlert').show();
+    return;
   }
 
   if (password != confirmPassword) {
@@ -110,13 +118,14 @@ formGroup.addEventListener('keypress', e => {
 });
 
 // Check if any fields are empty
-function areNull(){
-  var len = arguments.length;
-  for (var i = 1; i < len; i++) {
-    if (arguments[i] === null) {
-       return false;
+function areNull(fields) {
+  var len = fields.length;
+  for (var i = 0; i < len; i++) {
+    if (fields[i] === "") {
+      //console.log("Found a null field.");
+      return true;
     }
   }
-  return true;
+  return false;
 }
 

@@ -71,6 +71,8 @@ a {
 .form-group * {
   max-width: 400px;
   margin: 0 auto;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .main {
@@ -101,16 +103,6 @@ a {
 
 #cancelButton {
   color: #FFF;
-}
-
-#txtEmail {
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-
-#txtPassword {
-  margin-bottom: 15px;
-  margin-top: 15px;
 }
 
 #loginAlert {

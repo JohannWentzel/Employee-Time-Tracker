@@ -57,6 +57,6 @@ btnLogOut.addEventListener('click', e => {
 
 // Initialize the DHTMLX scheduler
 function init() {
-  scheduler.init('scheduler_here',new Date(),"month");
+  scheduler.init('scheduler_here', new Date(), "month");
 }
 
