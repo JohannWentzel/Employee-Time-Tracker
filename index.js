@@ -11,3 +11,8 @@ http.listen( port, function () {
 });
 
 app.use(express.static(__dirname + '/public'));
+
+// Routing to login page
+app.get('/*', function(req, res){
+  res.sendFile(__dirname + '/public/login.html');
+});
