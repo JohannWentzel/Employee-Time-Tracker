@@ -1,3 +1,4 @@
+
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyCiTqWN0OhnaaQibMzHgL5itpqQX1bnEo8",
@@ -9,28 +10,22 @@ var config = {
 
 // Create & initializes the Firebase app instance
 firebase.initializeApp(config);
-
+var UID;
 // Get a reference to the database service
 var database = firebase.database();
 
 // Create database references for JSON children
 var dbEvents = database.ref().child('Events');
-var dbEmployee = database.ref().child('Employee/1Oe26Rls1sWzDyuOVEzY3IKxMG42'); // TODO: pull the current logged-in user
+//var dbEmployee; //= database.ref().child("Employee/hAymr6CBameiJT6BlkofnYYChSi1"); // TODO: pull the current logged-in user
 
 // Read the Events from Firebase
 dbEvents.on('value', snapshot => {
-  console.log(snapshot.val());
+  //console.log(snapshot.val());
   scheduler.firebase(dbEvents); // Set events to the scheduler
 });
 
 // More testing..
-dbEmployee.once("value").then( snapshot => {
-  var name = snapshot.child("name").val();
-  var type = snapshot.child("type").val(); 
-// TODO:  var email = snapshot.child("email").val();
-  console.log(name);
-  console.log(type);
-});
+
 
 // Get UI element references
 const btnLogOut = document.getElementById('logOutButton');
@@ -40,10 +35,21 @@ const navbar = document.getElementById('navbar');
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    console.log(user);
+    UID = user.uid;
     showUser.innerText = user.email;
     btnLogOut.classList.remove('hide');
     navbar.style.visibility = "visible";
+
+
+    let dbEmployee = database.ref().child("Employee/"+UID);
+    dbEmployee.once("value").then( snapshot => {
+      let name = snapshot.child("name").val();
+      let type = snapshot.child("type").val();
+      console.log(name);
+      console.log(type);
+    });
+
+
   } else {
       window.location.href = "login.html";
   }
