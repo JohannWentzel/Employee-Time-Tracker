@@ -10,19 +10,12 @@ var config = {
 
 // Create & initializes the Firebase app instance
 firebase.initializeApp(config);
-var UID;
+
 // Get a reference to the database service
 var database = firebase.database();
 
 // Create database references for JSON children
-var dbEvents = database.ref().child('Events');
-//var dbEmployee; //= database.ref().child("Employee/hAymr6CBameiJT6BlkofnYYChSi1"); // TODO: pull the current logged-in user
 
-// Read the Events from Firebase
-dbEvents.on('value', snapshot => {
-  //console.log(snapshot.val());
-  scheduler.firebase(dbEvents); // Set events to the scheduler
-});
 
 // More testing..
 
@@ -35,18 +28,30 @@ const navbar = document.getElementById('navbar');
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    UID = user.uid;
+    let UID = user.uid;
     showUser.innerText = user.email;
     btnLogOut.classList.remove('hide');
     navbar.style.visibility = "visible";
-
-
+    let email="";
+    let type = "";
+    let name = "";
+    //populate the calendar and anything else that has to do with the uniqe ID on load.
+    //database can be updated later using the email from the page it self
     let dbEmployee = database.ref().child("Employee/"+UID);
     dbEmployee.once("value").then( snapshot => {
-      let name = snapshot.child("name").val();
-      let type = snapshot.child("type").val();
+      name = snapshot.child("name").val();
+      type = snapshot.child("type").val();
+      email = snapshot.child("email").val();
+      email = email.replace(".","@");
       console.log(name);
       console.log(type);
+      console.log(email);
+      let dbEvents = database.ref().child('Events/'+email);
+        //Read the Events from Firebase
+      dbEvents.on('value', snapshot => {
+            //console.log(snapshot.val());
+        scheduler.firebase(dbEvents); // Set events to the scheduler
+      });
     });
 
 
@@ -65,4 +70,3 @@ btnLogOut.addEventListener('click', e => {
 function init() {
   scheduler.init('scheduler_here', new Date(), "month");
 }
-
