@@ -42,18 +42,18 @@ firebase.auth().onAuthStateChanged(user => {
       name = snapshot.child("name").val();
       type = snapshot.child("type").val();
       email = snapshot.child("email").val();
-      email = email.replace(".","@");
       console.log(name);
       console.log(type);
       console.log(email);
-      let dbEvents = database.ref().child('Events/'+email);
-        //Read the Events from Firebase
-      dbEvents.on('value', snapshot => {
-            //console.log(snapshot.val());
-        scheduler.firebase(dbEvents); // Set events to the scheduler
-      });
-    });
 
+    });
+    console.log(UID);
+    let dbEvents = database.ref().child('Events/'+UID);
+      //Read the Events from Firebase
+      dbEvents.on('value', snapshot => {
+          //console.log(snapshot.val());
+          scheduler.firebase(dbEvents); // Set events to the scheduler
+      });
 
   } else {
       window.location.href = "login.html";
