@@ -120,6 +120,28 @@ projectsBtn.addEventListener('click', e => {
 
 });
 
+
+approvalsBtn.addEventListener('click', e => {
+
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("1").innerText = "Approval1";
+  document.getElementById("2").innerText = "Approval2";
+  document.getElementById("3").innerText = "Approval3";
+
+});
+
+settingsBtn.addEventListener('click', e => {
+
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("1").innerText = "Delete user";
+  document.getElementById("2").innerText = "Add User";
+  document.getElementById("3").innerText = "Add Project";
+
+
+
+});
+
+
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 
