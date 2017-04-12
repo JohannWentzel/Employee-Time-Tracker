@@ -90,22 +90,21 @@ btnLogOut.addEventListener('click', e => {
 employeesBtn.addEventListener('click', e => {
       //displays a container with all employees in the database
       document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById("1").innerText = "Employee1";
-      document.getElementById("2").innerText = "Employee2";
-      document.getElementById("3").innerText = "Employee3";
-      document.getElementById("4").innerText = "Employee4";
+
+
 
       //Loop through "Employee" to get data of every Employee in the data base
+      var index = 1;
       var query = firebase.database().ref("Employee/").orderByKey();
       query.once("value")
         .then(function(snapshot) {
           snapshot.forEach(function(childSnapshot) {
             // key will be "ada" the first time and "alan" the second time
             var key = childSnapshot.key;
-            var userArray = [];
-            userArray.push(key);
+            var childData = childSnapshot.val();
+            document.getElementById(index.toString()).innerText = childData["name"];
+            index++;
 
-            console.log(userArray);
   });
 });
 
@@ -117,7 +116,6 @@ projectsBtn.addEventListener('click', e => {
     document.getElementById("1").innerText = "Project1";
     document.getElementById("2").innerText = "Project2";
     document.getElementById("3").innerText = "Project3";
-    document.getElementById("4").innerText = "Project4";
 
 
 });
