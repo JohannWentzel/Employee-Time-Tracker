@@ -48,6 +48,7 @@ firebase.auth().onAuthStateChanged(user => {
 
     });
     console.log(UID);
+
     let dbEvents = database.ref().child('Events/'+UID);
       //Read the Events from Firebase
       dbEvents.on('value', snapshot => {
@@ -55,6 +56,19 @@ firebase.auth().onAuthStateChanged(user => {
           scheduler.firebase(dbEvents); // Set events to the scheduler
       });
 
+/*
+        //manager wants to see all events for all UID's
+      let dbEvents2 = database.ref().child('Events/');
+      //Read the Events from Firebase
+      dbEvents.on('value', snapshot => {
+          snapshot.forEach(function (allEventsSnapshot) {
+            console.log(allEventsSnapshot);
+            scheduler.firebase(dbEvents2);
+          });
+
+           // Set events to the scheduler
+      });
+*/
   } else {
       window.location.href = "login.html";
   }
