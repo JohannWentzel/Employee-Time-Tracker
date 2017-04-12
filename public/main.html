@@ -21,19 +21,47 @@
     <script type="text/javascript" src="/codebase/dhtmlx_scheduler_firebase.js"></script>
   </head>
   <!-- On load, initialize the DHTMLX Scheduler -->
-  <body class="main" onload="init();">
+  <body class="main" onload="init();" >
+
+<div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#" id="1"></a>
+      <a href="#" id="2"></a>
+      <a href="#" id="3"></a>
+      <a href="#" id="4"></a>
+      <a href="#" id="5"></a>
+      <a href="#" id="6"></a>
+      <a href="#" id="7"></a>
+      <a href="#" id="8"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+
+
+</div>
+    <!-- Use any element to open the sidenav -->
+    <!--  <span onclick="openNav()">open</span> -->
+
+<div id="main" >
     <div class="navbar" id="navbar">
       <ul id="navbar-ul">
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> PROJECTS</a></li>
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> EMPLOYEES</a></li>
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> APPROVALS</a></li>
-        <li><a href="#" class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> SETTINGS</a></li>
+        <li><a href="#" id="projectsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> PROJECTS</a></li>
+        <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> EMPLOYEES</a></li>
+        <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> APPROVALS</a></li>
+        <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> SETTINGS</a></li>
       </ul>
       <div id="topRight">
         <span id="userEmail"></span>
         <button type="button" id="logOutButton" class="btn btn-danger hide"><span class="glyphicon glyphicon-log-out"></button>
       </div>
     </div>
+</div>
+
     <!-- Begin DHTMLX Scheduler -->
     <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:90%; padding:10px;'>
       <div class="dhx_cal_navline">
@@ -46,8 +74,9 @@
         <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
       </div>
       <div class="dhx_cal_header"></div>
-      <div class="dhx_cal_data"></div>       
+      <div class="dhx_cal_data"></div>
     </div>
+
   </body>
   <script  src="main.js"></script>
 </html>

@@ -24,6 +24,10 @@ var database = firebase.database();
 const btnLogOut = document.getElementById('logOutButton');
 const showUser = document.getElementById('userEmail');
 const navbar = document.getElementById('navbar');
+const employeesBtn = document.getElementById('employeesBtn');
+const projectsBtn = document.getElementById('projectsBtn');
+const settingsBtn = document.getElementById('settingsBtn');
+const approvalsBtn = document.getElementById('approvalsBtn');
 
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
@@ -56,6 +60,8 @@ firebase.auth().onAuthStateChanged(user => {
           scheduler.firebase(dbEvents); // Set events to the scheduler
       });
 
+
+
 /*
         //manager wants to see all events for all UID's
       let dbEvents2 = database.ref().child('Events/');
@@ -79,6 +85,48 @@ btnLogOut.addEventListener('click', e => {
   firebase.auth().signOut();
   window.location.href = "login.html";
 });
+
+//Manager's navbar-employee button
+employeesBtn.addEventListener('click', e => {
+      //displays a container with all employees in the database
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("1").innerText = "Employee1";
+      document.getElementById("2").innerText = "Employee2";
+      document.getElementById("3").innerText = "Employee3";
+      document.getElementById("4").innerText = "Employee4";
+
+      //Loop through "Employee" to get data of every Employee in the data base
+      var query = firebase.database().ref("Employee/").orderByKey();
+      query.once("value")
+        .then(function(snapshot) {
+          snapshot.forEach(function(childSnapshot) {
+            // key will be "ada" the first time and "alan" the second time
+            var key = childSnapshot.key;
+            var userArray = [];
+            userArray.push(key);
+
+            console.log(userArray);
+  });
+});
+
+});
+
+projectsBtn.addEventListener('click', e => {
+
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("1").innerText = "Project1";
+    document.getElementById("2").innerText = "Project2";
+    document.getElementById("3").innerText = "Project3";
+    document.getElementById("4").innerText = "Project4";
+
+
+});
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+
+}
+
 
 // Initialize the DHTMLX scheduler
 function init() {
