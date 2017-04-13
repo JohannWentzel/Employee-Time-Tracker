@@ -211,3 +211,22 @@ a {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
+
+.rbc-label-start {
+    font-family: fontawesome;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.rbc-center-text {
+    font-family: 'Roboto', 'Myriad Set Pro', 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial;
+    fill: black;
+}
+
+.hours .rbc-center-text-line0 {
+    font-size: 30px;
+}
+
+#calendar{
+    height: 1000px;
+}

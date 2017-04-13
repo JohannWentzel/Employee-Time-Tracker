@@ -102,7 +102,7 @@ employeesBtn.addEventListener('click', e => {
             // key will be "ada" the first time and "alan" the second time
             var key = childSnapshot.key;
             var childData = childSnapshot.val();
-            document.getElementById(index.toString()).innerText = childData["name"];
+            document.getElementById(index.toString()).innerText = childData["firstName"];
             index++;
 
   });
@@ -146,6 +146,20 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 
 }
+
+var hours = new RadialProgressChart('.hours', {
+    diameter: 200,
+    max: 40,
+    round: false,
+    series: [{
+        value: 37.75,
+        color: ['red', '#7CFC00']
+    }],
+    center: function(d) {
+        return d.toFixed(2) + ' HOURS'
+    }
+});
+
 
 
 // Initialize the DHTMLX scheduler
