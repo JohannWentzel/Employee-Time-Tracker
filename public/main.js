@@ -16,9 +16,7 @@ var database = firebase.database();
 
 // Create database references for JSON children
 
-
 // More testing..
-
 
 // Get UI element references
 const btnLogOut = document.getElementById('logOutButton');
@@ -35,7 +33,7 @@ firebase.auth().onAuthStateChanged(user => {
     let UID = user.uid;
     showUser.innerText = user.email;
     btnLogOut.classList.remove('hide');
-    navbar.style.visibility = "visible";
+
     let email="";
     let type = "";
     let name = "";
@@ -46,12 +44,9 @@ firebase.auth().onAuthStateChanged(user => {
       name = snapshot.child("name").val();
       type = snapshot.child("type").val();
       email = snapshot.child("email").val();
-      console.log(name);
-      console.log(type);
-      console.log(email);
 
     });
-    console.log(UID);
+  //  console.log(UID);
 
     let dbEvents = database.ref().child('Events/'+UID);
     //Read the Events from Firebase
@@ -63,7 +58,7 @@ firebase.auth().onAuthStateChanged(user => {
            let start=childSnapshot.child("start_date").val();
            let end=childSnapshot.child("end_date").val();
            let duration = (end-start)/(1000*60*60);
-           console.log(duration);
+           //console.log(duration);
            totalHours=totalHours+duration;
 
 
@@ -72,21 +67,42 @@ firebase.auth().onAuthStateChanged(user => {
         hours.update(totalHours);
     });
 
+    //Display navbar Buttons IF the current is of type Manager
+    return firebase.database().ref('/Employee/' + UID).once('value').then(function(snapshot) {
+    let userType = snapshot.child("type").val();
+      if(userType == "Manager"){
+        employeesBtn.style.visibility = "visible";
+        projectsBtn.style.visibility = "visible";
+        settingsBtn.style.visibility = "visible";
+        approvalsBtn.style.visibility = "visible";
+      }
+      else {
+        employeesBtn.style.visibility = "hidden";
+        projectsBtn.style.visibility = "hidden";
+        settingsBtn.style.visibility = "hidden";
+        approvalsBtn.style.visibility = "hidden";
+      }
 
-
-    /*
-    //manager wants to see all events for all UID's
-    let dbEvents2 = database.ref().child('Events/');
-    //Read the Events from Firebase
-    dbEvents.on('value', snapshot => {
-    snapshot.forEach(function (allEventsSnapshot) {
-    console.log(allEventsSnapshot);
-    scheduler.firebase(dbEvents2);
+      //manager wants to see all events for all UID's
+       if(userType == "Manager"){
+        let dbEvents2 = database.ref().child('Events/');
+       //Read the Events from Firebase
+        dbEvents2.on('value', snapshot => {
+        snapshot.forEach(function (allEventsSnapshot) {
+        console.log(allEventsSnapshot);
+        //each snapshot contains events for each user.
+        //need to iterate through each user to get all events of each user.
+        //then add them to the calendar
+        //scheduler.firebase(dbEvents2);
+         });
+         // Set events to the scheduler
+         });
+       }
     });
 
-    // Set events to the scheduler
-    });
-    */
+
+
+
   } else {
     window.location.href = "login.html";
   }
@@ -117,6 +133,7 @@ employeesBtn.addEventListener('click', e => {
   });
 });
 
+//Nav bar projects
 projectsBtn.addEventListener('click', e => {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Project1";
@@ -124,7 +141,7 @@ projectsBtn.addEventListener('click', e => {
   document.getElementById("3").innerText = "Project3";
 });
 
-
+//Nav bar approvals
 approvalsBtn.addEventListener('click', e => {
 
   document.getElementById("mySidenav").style.width = "250px";
@@ -134,14 +151,13 @@ approvalsBtn.addEventListener('click', e => {
 
 });
 
+//Nav bar Setting
 settingsBtn.addEventListener('click', e => {
 
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Delete user";
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
-
-
 
 });
 

@@ -43,7 +43,7 @@ btnLogin.addEventListener('click', e => {
   });
 });
 
-// Display the sign-up form 
+// Display the sign-up form
 btnSignUp.addEventListener('click', f => {
   btnLogin.classList.add('hide');
   btnSignUp.classList.add('hide');
@@ -101,7 +101,7 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
   }
 });
 
-// On click, hide the specified element 
+// On click, hide the specified element
 $("[data-hide]").click(function(){
   $($(this).attr('data-hide')).hide();
 });
@@ -129,4 +129,3 @@ function areNull(fields) {
   }
   return false;
 }
-
