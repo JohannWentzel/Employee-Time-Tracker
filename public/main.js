@@ -55,9 +55,21 @@ firebase.auth().onAuthStateChanged(user => {
 
     let dbEvents = database.ref().child('Events/'+UID);
     //Read the Events from Firebase
+      let totalHours=0;
     dbEvents.on('value', snapshot => {
       //console.log(snapshot.val());
+        snapshot.forEach(function (childSnapshot) {
+           var key = childSnapshot.key;
+           let start=childSnapshot.child("start_date").val();
+           let end=childSnapshot.child("end_date").val();
+           let duration = (end-start)/(1000*60*60);
+           console.log(duration);
+           totalHours=totalHours+duration;
+
+
+        });
       scheduler.firebase(dbEvents); // Set events to the scheduler
+        hours.update(totalHours);
     });
 
 
@@ -112,26 +124,38 @@ projectsBtn.addEventListener('click', e => {
   document.getElementById("3").innerText = "Project3";
 });
 
+
 approvalsBtn.addEventListener('click', e => {
+
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Approval1";
   document.getElementById("2").innerText = "Approval2";
   document.getElementById("3").innerText = "Approval3";
+
 });
 
 settingsBtn.addEventListener('click', e => {
+
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Delete user";
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
+
+
+
 });
+
 
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 
 var hours = new RadialProgressChart('.hours', {
-  diameter: 200,
+    diameter: 100,
+    stroke:{
+        width: 20,
+        gap: 2
+    },
     max: 40,
     round: false,
     series: [{
@@ -142,6 +166,8 @@ var hours = new RadialProgressChart('.hours', {
               return d.toFixed(2) + ' HOURS'
             }
 });
+
+
 
 // Initialize the DHTMLX scheduler
 function init() {
