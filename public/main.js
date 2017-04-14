@@ -52,11 +52,16 @@ firebase.auth().onAuthStateChanged(user => {
 
     let dbEvents = database.ref().child('Events/'+UID);
     //Read the Events from Firebase
+    //get today date
+
 
 
     dbEvents.on('value', snapshot => {
       //console.log(snapshot.val());
         let totalHours=0;
+
+        weekstart=Date.parse("last sunday").valueOf();
+        weekend=Date.parse("next sunday").valueOf()-1;
 
         snapshot.forEach(function (childSnapshot) {
            var key = childSnapshot.key;
@@ -65,12 +70,17 @@ firebase.auth().onAuthStateChanged(user => {
            let end=childSnapshot.child("end_date").val();
            let duration = (end-start)/(1000*60*60);
            //console.log(duration);
-           totalHours=totalHours+duration;
+
+           if(start>=weekstart && start<=weekend){
+               console.log(totalHours);
+               totalHours=totalHours+duration;
+           }
+
 
 
         });
       scheduler.firebase(dbEvents); // Set events to the scheduler
-        hours.update(totalHours);
+      hours.update(totalHours);
     });
 
     //Display navbar Buttons IF the current is of type Manager
