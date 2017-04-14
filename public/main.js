@@ -196,8 +196,13 @@ var hours = new RadialProgressChart('.hours', {
 // Initialize the DHTMLX scheduler
 function init() {
   scheduler.init('scheduler_here', new Date(), "month");
-  scheduler.locale.labels.section_select = 'Projects';
   scheduler.locale.labels.section_text = 'Description';
+  scheduler.locale.labels.section_projects= 'Projects';
+  scheduler.locale.labels.section_type = 'Type';
+
+  // day/week views will show the expanded event lightbox
+  scheduler.config.details_on_create=true;
+  scheduler.config.details_on_dblclick=true;
 
   // labels are currently placeholders
   var project_opts = [
@@ -206,9 +211,16 @@ function init() {
     { key: 3, label: 'Project 3' }
   ];
 
+  var type_opts = [
+    { key: 1, label: 'Development' },
+    { key: 2, label: 'Meeting' },
+    { key: 3, label: 'Testing' }
+  ];
+
   scheduler.config.lightbox.sections = [
-    { name:"text", height:50, map_to:"auto", type:"textarea", focus:true },
-    { name:"select", height:50, map_to:"type", type:"select", options:project_opts},
-    { name:"time", height:72, type:"time", map_to:"auto"}
+    { name:"text", height:50, map_to:"text", type:"textarea", focus:true },
+    { name:"projects", height:50, map_to:"type", type:"select", options:project_opts},
+    { name:"type", height:50, map_to:"type", type:"select", options:type_opts},
+    { name:"time", height:72, type:"time", map_to:"auto"} // note that this field must always be last
   ];
 }
