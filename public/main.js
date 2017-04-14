@@ -135,7 +135,7 @@ var hours = new RadialProgressChart('.hours', {
     max: 40,
     round: false,
     series: [{
-      value: 37.75,
+      value: 15.6,
     color: ['red', '#7CFC00']
     }],
     center: function(d) {
