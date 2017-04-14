@@ -195,5 +195,20 @@ var hours = new RadialProgressChart('.hours', {
 
 // Initialize the DHTMLX scheduler
 function init() {
-  scheduler.init('scheduler_here', new Date(), "week");
+  scheduler.init('scheduler_here', new Date(), "month");
+  scheduler.locale.labels.section_select = 'Projects';
+  scheduler.locale.labels.section_text = 'Description';
+
+  // labels are currently placeholders
+  var project_opts = [
+    { key: 1, label: 'Project 1' },
+    { key: 2, label: 'Project 2' },
+    { key: 3, label: 'Project 3' }
+  ];
+
+  scheduler.config.lightbox.sections = [
+    { name:"text", height:50, map_to:"auto", type:"textarea", focus:true },
+    { name:"select", height:50, map_to:"type", type:"select", options:project_opts},
+    { name:"time", height:72, type:"time", map_to:"auto"}
+  ];
 }
