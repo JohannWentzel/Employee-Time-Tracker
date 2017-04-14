@@ -214,8 +214,9 @@ a {
 
 .rbc-label-start {
     font-family: fontawesome;
-    font-weight: bold;
-    font-size: 30px;
+    font-weight: normal;
+    font-size: 15px;
+
 }
 
 .rbc-center-text {
@@ -224,9 +225,10 @@ a {
 }
 
 .hours .rbc-center-text-line0 {
-    font-size: 30px;
+    font-size: 15px;
 }
 
 #calendar{
-    height: 1000px;
+    height: 1500px;
 }
+
