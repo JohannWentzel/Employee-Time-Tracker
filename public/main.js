@@ -54,29 +54,29 @@ firebase.auth().onAuthStateChanged(user => {
     console.log(UID);
 
     let dbEvents = database.ref().child('Events/'+UID);
-      //Read the Events from Firebase
-      dbEvents.on('value', snapshot => {
-          //console.log(snapshot.val());
-          scheduler.firebase(dbEvents); // Set events to the scheduler
-      });
+    //Read the Events from Firebase
+    dbEvents.on('value', snapshot => {
+      //console.log(snapshot.val());
+      scheduler.firebase(dbEvents); // Set events to the scheduler
+    });
 
 
 
-/*
-        //manager wants to see all events for all UID's
-      let dbEvents2 = database.ref().child('Events/');
-      //Read the Events from Firebase
-      dbEvents.on('value', snapshot => {
-          snapshot.forEach(function (allEventsSnapshot) {
-            console.log(allEventsSnapshot);
-            scheduler.firebase(dbEvents2);
-          });
+    /*
+    //manager wants to see all events for all UID's
+    let dbEvents2 = database.ref().child('Events/');
+    //Read the Events from Firebase
+    dbEvents.on('value', snapshot => {
+    snapshot.forEach(function (allEventsSnapshot) {
+    console.log(allEventsSnapshot);
+    scheduler.firebase(dbEvents2);
+    });
 
-           // Set events to the scheduler
-      });
-*/
+    // Set events to the scheduler
+    });
+    */
   } else {
-      window.location.href = "login.html";
+    window.location.href = "login.html";
   }
 });
 
@@ -88,81 +88,62 @@ btnLogOut.addEventListener('click', e => {
 
 //Manager's navbar-employee button
 employeesBtn.addEventListener('click', e => {
-      //displays a container with all employees in the database
-      document.getElementById("mySidenav").style.width = "250px";
-
-
-
-      //Loop through "Employee" to get data of every Employee in the data base
-      var index = 1;
-      var query = firebase.database().ref("Employee/").orderByKey();
-      query.once("value")
-        .then(function(snapshot) {
-          snapshot.forEach(function(childSnapshot) {
-            // key will be "ada" the first time and "alan" the second time
-            var key = childSnapshot.key;
-            var childData = childSnapshot.val();
-            document.getElementById(index.toString()).innerText = childData["firstName"];
-            index++;
-
+  //displays a container with all employees in the database
+  document.getElementById("mySidenav").style.width = "250px";
+  //Loop through "Employee" to get data of every Employee in the data base
+  var index = 1;
+  var query = firebase.database().ref("Employee/").orderByKey();
+  query.once("value")
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+      var key = childSnapshot.key;
+      var childData = childSnapshot.val();
+      document.getElementById(index.toString()).innerText = childData["firstName"];
+      index++;
+    });
   });
 });
 
-});
-
 projectsBtn.addEventListener('click', e => {
-
-    document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("1").innerText = "Project1";
-    document.getElementById("2").innerText = "Project2";
-    document.getElementById("3").innerText = "Project3";
-
-
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("1").innerText = "Project1";
+  document.getElementById("2").innerText = "Project2";
+  document.getElementById("3").innerText = "Project3";
 });
-
 
 approvalsBtn.addEventListener('click', e => {
-
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Approval1";
   document.getElementById("2").innerText = "Approval2";
   document.getElementById("3").innerText = "Approval3";
-
 });
 
 settingsBtn.addEventListener('click', e => {
-
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Delete user";
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
-
-
-
 });
 
-
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-
+  document.getElementById("mySidenav").style.width = "0";
 }
 
 var hours = new RadialProgressChart('.hours', {
-    diameter: 200,
+  diameter: 200,
     max: 40,
     round: false,
     series: [{
-        value: 37.75,
-        color: ['red', '#7CFC00']
+      value: 37.75,
+    color: ['red', '#7CFC00']
     }],
     center: function(d) {
-        return d.toFixed(2) + ' HOURS'
-    }
+              return d.toFixed(2) + ' HOURS'
+            }
 });
-
-
 
 // Initialize the DHTMLX scheduler
 function init() {
-  scheduler.init('scheduler_here', new Date(), "month");
+  scheduler.init('scheduler_here', new Date(), "week");
 }

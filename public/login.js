@@ -93,9 +93,8 @@ btnSubmit.addEventListener('click', e => {
 // Firebase authentication listener
 firebase.auth().onAuthStateChanged(firebaseUser => {
   if (firebaseUser) {
-    console.log(firebaseUser);
     var s = firebaseUser.uid;
-    print (s);
+    console.log(s);
     window.location.href = "main.html";
   } else {
       console.log(firebaseUser);
