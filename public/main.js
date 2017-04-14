@@ -16,7 +16,9 @@ var database = firebase.database();
 
 // Create database references for JSON children
 
+
 // More testing..
+
 
 // Get UI element references
 const btnLogOut = document.getElementById('logOutButton');
@@ -50,11 +52,15 @@ firebase.auth().onAuthStateChanged(user => {
 
     let dbEvents = database.ref().child('Events/'+UID);
     //Read the Events from Firebase
-      let totalHours=0;
+
+
     dbEvents.on('value', snapshot => {
       //console.log(snapshot.val());
+        let totalHours=0;
+
         snapshot.forEach(function (childSnapshot) {
            var key = childSnapshot.key;
+
            let start=childSnapshot.child("start_date").val();
            let end=childSnapshot.child("end_date").val();
            let duration = (end-start)/(1000*60*60);
@@ -159,6 +165,8 @@ settingsBtn.addEventListener('click', e => {
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
 
+
+
 });
 
 
@@ -175,7 +183,7 @@ var hours = new RadialProgressChart('.hours', {
     max: 40,
     round: false,
     series: [{
-      value: 15.6,
+      value: 0,
     color: ['red', '#7CFC00']
     }],
     center: function(d) {
