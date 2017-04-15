@@ -184,14 +184,15 @@ var hours = new RadialProgressChart('.hours', {
 
 // Initialize the DHTMLX scheduler
 function init() {
+  scheduler.config.start_on_monday = false; // Weeks start on Sunday
   scheduler.init('scheduler_here', new Date(), "month");
   scheduler.locale.labels.section_text = 'Description';
   scheduler.locale.labels.section_projects= 'Projects';
   scheduler.locale.labels.section_type = 'Type';
 
   // Day/week views will show the expanded event lightbox
-  scheduler.config.details_on_create=true;
-  scheduler.config.details_on_dblclick=true;
+  scheduler.config.details_on_create = true;
+  scheduler.config.details_on_dblclick = true;
 
   // Project labels are currently placeholders
   var project_opts = [
