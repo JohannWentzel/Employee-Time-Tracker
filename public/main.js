@@ -14,12 +14,6 @@ firebase.initializeApp(config);
 // Get a reference to the database service
 var database = firebase.database();
 
-// Create database references for JSON children
-
-
-// More testing..
-
-
 // Get UI element references
 const btnLogOut = document.getElementById('logOutButton');
 const showUser = document.getElementById('userEmail');
@@ -36,52 +30,48 @@ firebase.auth().onAuthStateChanged(user => {
     showUser.innerText = user.email;
     btnLogOut.classList.remove('hide');
 
-    let email="";
+    let email ="";
     let type = "";
     let name = "";
-    //populate the calendar and anything else that has to do with the uniqe ID on load.
-    //database can be updated later using the email from the page it self
+    // Populate the calendar and anything else that has to do with the uniqe ID on load
+    // Database can be updated later using the email from the page it self
     let dbEmployee = database.ref().child("Employee/"+UID);
     dbEmployee.once("value").then( snapshot => {
       name = snapshot.child("name").val();
       type = snapshot.child("type").val();
       email = snapshot.child("email").val();
-
     });
-  //  console.log(UID);
+    //console.log(UID);
 
     let dbEvents = database.ref().child('Events/'+UID);
-    //Read the Events from Firebase
 
-
+    // Read the Events from Firebase
     dbEvents.on('value', snapshot => {
       //console.log(snapshot.val());
-        let totalHours=0;
-        var today = new Date();
-        var mondayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+1).valueOf();
-        var sundayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+8).valueOf()-1;
+      let totalHours = 0;
+      var today = new Date();
+      var mondayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+1).valueOf();
+      var sundayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+8).valueOf()-1;
 
-        snapshot.forEach(function (childSnapshot) {
-           var key = childSnapshot.key;
+      snapshot.forEach(function (childSnapshot) {
+        var key = childSnapshot.key;
 
-           let start=childSnapshot.child("start_date").val();
-           let end=childSnapshot.child("end_date").val();
-           let duration = (end-start)/(1000*60*60);
-           //console.log(duration);
-           if (start>=mondayOfWeek && start<=sundayOfWeek){
-               totalHours=totalHours+duration;
-           }
-
-
-
-        });
+        let start = childSnapshot.child("start_date").val();
+        let end = childSnapshot.child("end_date").val();
+        let duration = (end-start)/(1000*60*60);
+        //console.log(duration);
+        if (start >= mondayOfWeek && start <= sundayOfWeek){
+          totalHours = totalHours + duration;
+        }
+      });
       scheduler.firebase(dbEvents); // Set events to the scheduler
-        hours.update(totalHours);
+      hours.update(totalHours);
     });
 
-    //Display navbar Buttons IF the current is of type Manager
+    // Display navbar if the user is a Manager
     return firebase.database().ref('/Employee/' + UID).once('value').then(function(snapshot) {
-    let userType = snapshot.child("type").val();
+      let userType = snapshot.child("type").val();
+
       if(userType == "Manager"){
         employeesBtn.style.visibility = "visible";
         projectsBtn.style.visibility = "visible";
@@ -89,32 +79,28 @@ firebase.auth().onAuthStateChanged(user => {
         approvalsBtn.style.visibility = "visible";
       }
       else {
-        employeesBtn.style.visibility = "hidden";
-        projectsBtn.style.visibility = "hidden";
-        settingsBtn.style.visibility = "hidden";
-        approvalsBtn.style.visibility = "hidden";
+        employeesBtn.remove();
+        projectsBtn.remove();
+        settingsBtn.remove();
+        approvalsBtn.remove();
       }
 
-      //manager wants to see all events for all UID's
-       if(userType == "Manager"){
-        let dbEvents2 = database.ref().child('Events/');
-       //Read the Events from Firebase
-        dbEvents2.on('value', snapshot => {
+    // Manager wants to see all events for all UID's
+    if(userType == "Manager"){
+      let dbEvents2 = database.ref().child('Events/');
+      // Read the Events from Firebase
+      dbEvents2.on('value', snapshot => {
         snapshot.forEach(function (allEventsSnapshot) {
-        console.log(allEventsSnapshot);
-        //each snapshot contains events for each user.
-        //need to iterate through each user to get all events of each user.
-        //then add them to the calendar
-        //scheduler.firebase(dbEvents2);
-         });
-         // Set events to the scheduler
-         });
-       }
+          console.log(allEventsSnapshot);
+          //each snapshot contains events for each user.
+          //need to iterate through each user to get all events of each user.
+          //then add them to the calendar
+          //scheduler.firebase(dbEvents2);
+        });
+        // Set events to the scheduler
+      });
+    }
     });
-
-
-
-
   } else {
     window.location.href = "login.html";
   }
@@ -126,11 +112,11 @@ btnLogOut.addEventListener('click', e => {
   window.location.href = "login.html";
 });
 
-//Manager's navbar-employee button
+// Manager's navbar-employee button
 employeesBtn.addEventListener('click', e => {
-  //displays a container with all employees in the database
+  // Displays a container with all employees in the database
   document.getElementById("mySidenav").style.width = "250px";
-  //Loop through "Employee" to get data of every Employee in the data base
+  // Loop through "Employee" to get data of every Employee in the data base
   var index = 1;
   var query = firebase.database().ref("Employee/").orderByKey();
   query.once("value")
@@ -145,7 +131,7 @@ employeesBtn.addEventListener('click', e => {
   });
 });
 
-//Nav bar projects
+// Navbar projects
 projectsBtn.addEventListener('click', e => {
   document.getElementById("mySidenav").style.width = "250px";
   document.getElementById("1").innerText = "Project1";
@@ -153,7 +139,7 @@ projectsBtn.addEventListener('click', e => {
   document.getElementById("3").innerText = "Project3";
 });
 
-//Nav bar approvals
+// Navbar approvals
 approvalsBtn.addEventListener('click', e => {
 
   document.getElementById("mySidenav").style.width = "250px";
@@ -163,7 +149,7 @@ approvalsBtn.addEventListener('click', e => {
 
 });
 
-//Nav bar Setting
+// Navbar Setting
 settingsBtn.addEventListener('click', e => {
 
   document.getElementById("mySidenav").style.width = "250px";
@@ -175,16 +161,15 @@ settingsBtn.addEventListener('click', e => {
 
 });
 
-
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 
 var hours = new RadialProgressChart('.hours', {
-    diameter: 100,
+  diameter: 100,
     stroke:{
-        width: 20,
-        gap: 2
+      width: 20,
+    gap: 2
     },
     max: 40,
     round: false,
@@ -197,8 +182,6 @@ var hours = new RadialProgressChart('.hours', {
             }
 });
 
-
-
 // Initialize the DHTMLX scheduler
 function init() {
   scheduler.init('scheduler_here', new Date(), "month");
@@ -206,27 +189,28 @@ function init() {
   scheduler.locale.labels.section_projects= 'Projects';
   scheduler.locale.labels.section_type = 'Type';
 
-  // day/week views will show the expanded event lightbox
+  // Day/week views will show the expanded event lightbox
   scheduler.config.details_on_create=true;
   scheduler.config.details_on_dblclick=true;
 
-  // labels are currently placeholders
+  // Project labels are currently placeholders
   var project_opts = [
-    { key: 1, label: 'Project 1' },
-    { key: 2, label: 'Project 2' },
-    { key: 3, label: 'Project 3' }
+  { key: 1, label: 'Project 1' },
+  { key: 2, label: 'Project 2' },
+  { key: 3, label: 'Project 3' }
   ];
 
   var type_opts = [
-    { key: 1, label: 'Development' },
-    { key: 2, label: 'Meeting' },
-    { key: 3, label: 'Testing' }
+  { key: 1, label: 'Development' },
+  { key: 2, label: 'Meeting' },
+  { key: 3, label: 'Testing' }
   ];
 
+  // Configure the lightbox fields 
   scheduler.config.lightbox.sections = [
-    { name:"text", height:50, map_to:"text", type:"textarea", focus:true },
-    { name:"projects", height:50, map_to:"type", type:"select", options:project_opts},
-    { name:"type", height:50, map_to:"type", type:"select", options:type_opts},
-    { name:"time", height:72, type:"time", map_to:"auto"} // note that this field must always be last
+  { name:"text", height:50, map_to:"text", type:"textarea", focus:true },
+  { name:"projects", height:50, map_to:"type", type:"select", options:project_opts},
+  { name:"type", height:50, map_to:"type", type:"select", options:type_opts},
+  { name:"time", height:72, type:"time", map_to:"auto"} // note that this field must always be last
   ];
 }
