@@ -51,6 +51,9 @@ firebase.auth().onAuthStateChanged(user => {
     dbEvents.on('value', snapshot => {
       //console.log(snapshot.val());
       let totalHours = 0;
+      let totalDev = 0;
+      let totalMeeting = 0;
+      let totalOther = 0;
       var today = new Date();
       var mondayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+1).valueOf();
       var sundayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+8).valueOf()-1;
@@ -61,13 +64,25 @@ firebase.auth().onAuthStateChanged(user => {
         let start = childSnapshot.child("start_date").val();
         let end = childSnapshot.child("end_date").val();
         let duration = (end-start)/(1000*60*60);
+        let type = childSnapshot.child("type").val();
+
         //console.log(duration);
         if (start >= mondayOfWeek && start <= sundayOfWeek){
           totalHours = totalHours + duration;
+          if (type === '1'){
+              totalDev = totalDev+duration;
+          }
+          else if (type == '2'){
+              totalMeeting = totalMeeting+duration;
+          }
+          else{
+              totalOther=totalOther+duration;
+          }
         }
       });
       scheduler.firebase(dbEvents); // Set events to the scheduler
       hours.update(totalHours);
+        hoursByType.update([totalOther,totalMeeting,totalDev])
     });
 
     // Display navbar if the user is a Manager
@@ -200,6 +215,16 @@ var vacation = new RadialProgressChart('.vacation', {
         return d.toFixed(1) + ' DAYS'
     }
 });
+
+var hoursByType = new RadialProgressChart('.hours_by_type', {
+    diameter: 130,
+    max: 40,
+    series: [
+        {labelStart: '\uF106', value: 15, color: ['#43C6DB','#2B65EC']},
+        {labelStart: '\uF101', value: 35, color: ['#79F7CF', '#41A317']},
+        {labelStart: '\uF105', value: 20, color: ['#F778A1', '#F70D1A']}
+    ]}
+);
 
 // Initialize the DHTMLX scheduler
 function init() {

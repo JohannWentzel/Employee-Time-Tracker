@@ -54,8 +54,15 @@
     </div>
     <div class="dashboard">
       <div class="col-md-2">
-        <div class="hours"><h1 class="left_menu_titles">Weekly Hours</h1></div>
-        <div class="vacation"><h2 class="left_menu_titles">Remaining Vacation</h2></div>
+        <div class="hours"><h2 class="hours_title" style="color: #657383">Weekly Hours</h2></div>
+          <div>
+              <h2 style="color: #657383">Hours By Type</h2>
+          <div class="hours_by_type"></div>
+              <div style="color: #657383"> Red - Development Time</div>
+              <div style="color: #657383"> Green - Meeting Time</div>
+              <div style="color: #657383"> Blue - Other</div>
+          </div>
+        <div class="vacation"><h2 class="vacation_title" style="color: #657383">Remaining Vacation</h2></div>
       </div>
       <div class="col-md-10" id="calendar">
         <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:90%; padding:10px;'>
