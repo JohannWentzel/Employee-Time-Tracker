@@ -40,6 +40,8 @@ firebase.auth().onAuthStateChanged(user => {
       name = snapshot.child("name").val();
       type = snapshot.child("type").val();
       email = snapshot.child("email").val();
+      vacation1=snapshot.child("vacation").val();
+      vacation.update(vacation1)
     });
     //console.log(UID);
 
@@ -180,6 +182,23 @@ var hours = new RadialProgressChart('.hours', {
     center: function(d) {
               return d.toFixed(2) + ' HOURS'
             }
+});
+
+var vacation = new RadialProgressChart('.vacation', {
+    diameter: 100,
+    stroke:{
+        width: 20,
+        gap: 2
+    },
+    max: 15,
+    round: false,
+    series: [{
+        value: 0,
+        color: ['#82CAFF', '#151B54']
+    }],
+    center: function(d) {
+        return d.toFixed(1) + ' DAYS'
+    }
 });
 
 // Initialize the DHTMLX scheduler

@@ -232,3 +232,10 @@ a {
 #calendar{
     height: 1500px;
 }
+
+.left_menu_titles{
+    border-top: medium;
+    color: #2E2E2E;
+    align-content: center;
+
+}
