@@ -10,8 +10,6 @@ var config = {
 // Create & initializes the Firebase app instance
 firebase.initializeApp(config);
 
-// var dbRef = firebase.database().ref().child('Employee').child('hAymr6CBameiJT6BlkofnYYChSi1').child('name');
-
 // Get UI element references
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');

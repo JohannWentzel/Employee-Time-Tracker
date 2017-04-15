@@ -136,7 +136,7 @@ a {
 #navbar-ul li a {
   border-radius: 5px;
   font-size: 18px;
-  font-weight: 800;
+  font-weight: 600;
   height: 40px;
   margin: auto 2%;
 }
@@ -183,17 +183,17 @@ a {
 }
 
 /* The navigation menu links */
-.sidenav a {
+.sidenav button, a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  font-size: 18px;
+  color: #FFFF;
   display: block;
   transition: 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover, .offcanvas a:focus{
+.sidenav button:hover, .offcanvas button:focus{
   color: #f1f1f1;
 }
 
@@ -209,7 +209,7 @@ a {
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav button, a {font-size: 18px;}
 }
 
 .rbc-label-start {

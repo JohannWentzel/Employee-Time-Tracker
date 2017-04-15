@@ -25,19 +25,44 @@
   </head>
   <!-- On load, initialize the DHTMLX Scheduler -->
   <body class="main" onload="init();" >
-    <div id="mySidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div id="employeeSidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeEmployee()">&times;</a>
       <a href="#" id="1"></a>
       <a href="#" id="2"></a>
       <a href="#" id="3"></a>
       <a href="#" id="4"></a>
       <a href="#" id="5"></a>
-      <a href="#" id="6"></a>
-      <a href="#" id="7"></a>
-      <a href="#" id="8"></a>
     </div>
+
+    <div id="projectSidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeProject()">&times;</a>
+      <a href="#" id="1">Project 1</a>
+      <a href="#" id="2">Project 2</a>
+      <a href="#" id="3">Project 3</a>
+
+    </div>
+
+    <div id="approvalSidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeApproval()">&times;</a>
+      <a href="#" id="2"></a>
+      <a href="#" id="3"></a>
+      <a href="#" id="4"></a>
+      <a href="#" id="5"></a>
+
+    </div>
+
+    <div id="settingSidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeSetting()">&times;</a>
+      <button type="deleteUserBtn" class="btn btn-danger" id="deleteBtn">Delete User</button>
+      <button type="addUserBtn" class="btn btn-danger" id="addUserBtn">Add User</button>
+      <button type="clickMeBtn" class="btn btn-danger" id="whatevaBtn">Click Me!</button>
+
+
+    </div>
+
     <!-- Use any element to open the sidenav -->
     <!--  <span onclick="openNav()">open</span> -->
+
     <div id="main" >
       <div class="navbar" id="navbar">
         <ul id="navbar-ul">
@@ -52,6 +77,7 @@
         </div>
       </div>
     </div>
+
     <div class="dashboard">
       <div class="col-md-2">
         <div class="hours"><h2 class="hours_title" style="color: #657383">Weekly Hours</h2></div>

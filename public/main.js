@@ -109,10 +109,7 @@ firebase.auth().onAuthStateChanged(user => {
       dbEvents2.on('value', snapshot => {
         snapshot.forEach(function (allEventsSnapshot) {
           console.log(allEventsSnapshot);
-          //each snapshot contains events for each user.
-          //need to iterate through each user to get all events of each user.
-          //then add them to the calendar
-          //scheduler.firebase(dbEvents2);
+
         });
         // Set events to the scheduler
       });
@@ -132,7 +129,7 @@ btnLogOut.addEventListener('click', e => {
 // Manager's navbar-employee button
 employeesBtn.addEventListener('click', e => {
   // Displays a container with all employees in the database
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("employeeSidenav").style.width = "250px";
   // Loop through "Employee" to get data of every Employee in the data base
   var index = 1;
   var query = firebase.database().ref("Employee/").orderByKey();
@@ -150,7 +147,8 @@ employeesBtn.addEventListener('click', e => {
 
 // Navbar projects
 projectsBtn.addEventListener('click', e => {
-  document.getElementById("mySidenav").style.width = "250px";
+
+  document.getElementById("projectSidenav").style.width = "250px";
   document.getElementById("1").innerText = "Project1";
   document.getElementById("2").innerText = "Project2";
   document.getElementById("3").innerText = "Project3";
@@ -159,7 +157,7 @@ projectsBtn.addEventListener('click', e => {
 // Navbar approvals
 approvalsBtn.addEventListener('click', e => {
 
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("approvalSidenav").style.width = "250px";
   document.getElementById("1").innerText = "Approval1";
   document.getElementById("2").innerText = "Approval2";
   document.getElementById("3").innerText = "Approval3";
@@ -169,17 +167,27 @@ approvalsBtn.addEventListener('click', e => {
 // Navbar Setting
 settingsBtn.addEventListener('click', e => {
 
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("settingSidenav").style.width = "250px";
   document.getElementById("1").innerText = "Delete user";
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
 
-
-
 });
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
+function closeEmployee() {
+  document.getElementById("employeeSidenav").style.width = "0";
+}
+
+function closeProject() {
+  document.getElementById("projectSidenav").style.width = "0";
+}
+
+function closeApproval() {
+  document.getElementById("approvalSidenav").style.width = "0";
+}
+
+function closeSetting() {
+  document.getElementById("settingSidenav").style.width = "0";
 }
 
 var hours = new RadialProgressChart('.hours', {
@@ -251,7 +259,7 @@ function init() {
   { key: 3, label: 'Testing' }
   ];
 
-  // Configure the lightbox fields 
+  // Configure the lightbox fields
   scheduler.config.lightbox.sections = [
   { name:"text", height:50, map_to:"text", type:"textarea", focus:true },
   { name:"projects", height:50, map_to:"type", type:"select", options:project_opts},
