@@ -164,7 +164,7 @@ employeesBtn.addEventListener('click', e => {
       // key will be "ada" the first time and "alan" the second time
       var key = childSnapshot.key;
       var childData = childSnapshot.val();
-      document.getElementById(index.toString()).innerText = childData["firstName"];
+      document.getElementById("employee"+index.toString()).innerText = childData["firstName"];
       index++;
     });
   });
