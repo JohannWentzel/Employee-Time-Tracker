@@ -22,6 +22,9 @@ const employeesBtn = document.getElementById('employeesBtn');
 const projectsBtn = document.getElementById('projectsBtn');
 const settingsBtn = document.getElementById('settingsBtn');
 const approvalsBtn = document.getElementById('approvalsBtn');
+const projectManagementBtn = document.getElementById('projectManagementBtn');
+const sendBtn = document.getElementById('sendBtn');
+const NotificationsBtn = document.getElementById('NotificationsBtn');
 
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
@@ -44,6 +47,18 @@ firebase.auth().onAuthStateChanged(user => {
       vacation.update(vacation1)
     });
     //console.log(UID);
+    let dbNotes = database.ref().child('Notification/'+UID);
+
+    dbNotes.on('value', snapshot => {
+        let html='';
+        snapshot.forEach(function(childSnapshot) {
+
+                html += "<div class=\"well\">"+childSnapshot.val()+"</div>";
+
+            });
+        document.getElementById('yourNotes').innerHTML = html;
+    });
+
 
     let dbEvents = database.ref().child('Events/'+UID);
 
@@ -89,7 +104,7 @@ firebase.auth().onAuthStateChanged(user => {
     return firebase.database().ref('/Employee/' + UID).once('value').then(function(snapshot) {
       let userType = snapshot.child("type").val();
 
-      if(userType == "Manager"){
+      if(userType == "Manager" || userType == "Admin"){
         employeesBtn.style.visibility = "visible";
         projectsBtn.style.visibility = "visible";
         settingsBtn.style.visibility = "visible";
@@ -174,6 +189,67 @@ settingsBtn.addEventListener('click', e => {
 
 });
 
+projectManagementBtn.addEventListener('click', e => {
+
+    var query = firebase.database().ref("Employee/").orderByKey();
+    query.once("value")
+        .then(function(snapshot) {
+            html='';
+            snapshot.forEach(function(childSnapshot) {
+                // key will be "ada" the first time and "alan" the second time
+                var key = childSnapshot.key;
+                var childData = childSnapshot.val();
+                let employee_first=childData["firstName"];
+                let employee_last=childData["lastName"];
+                let type = childData["type"];
+
+                html += "<option>"+employee_first+" "+employee_last+"</option>";
+
+
+            });
+            document.getElementById('recipient').innerHTML = html;
+        });
+
+
+
+
+    $('#NotificationsModal').appendTo("body");
+});
+
+sendBtn.addEventListener('click', e => {
+
+    let a = document.getElementById("recipient");
+    let recipient = a.options[a.selectedIndex].value;
+    msg=document.getElementById("message-text").value;
+
+    //get uid of the recipient
+    var query = firebase.database().ref("Employee/").orderByKey();
+    query.once("value")
+        .then(function(snapshot) {
+
+            snapshot.forEach(function(childSnapshot) {
+                // key will be "ada" the first time and "alan" the second time
+                var key = childSnapshot.key;
+                var childData = childSnapshot.val();
+                let employee_first=childData["firstName"];
+                let employee_last=childData["lastName"];
+                let full=employee_first+" "+employee_last;
+                if (full === recipient){
+
+                    firebase.database().ref("Notification/"+key).push(msg);
+                }
+            });
+
+        });
+
+
+
+    document.getElementById("message-text").value = "";
+    $('#NotificationsModal').modal('hide');
+});
+
+
+
 function closeEmployee() {
   document.getElementById("employeeSidenav").style.width = "0";
 }
@@ -233,6 +309,8 @@ var hoursByType = new RadialProgressChart('.hours_by_type', {
         {labelStart: '\uF105', value: 20, color: ['#F778A1', '#F70D1A']}
     ]}
 );
+
+
 
 // Initialize the DHTMLX scheduler
 function init() {

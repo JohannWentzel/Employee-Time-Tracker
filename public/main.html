@@ -7,6 +7,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- jQuery library -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -21,6 +22,9 @@
     <script type="text/javascript" src="/codebase/dhtmlx_scheduler_firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.js"></script>
     <script src="https://rawgit.com/pablomolnar/radial-progress-chart/master/dist/radial-progress-chart.js"></script>
+
+
+
 
   </head>
   <!-- On load, initialize the DHTMLX Scheduler -->
@@ -53,9 +57,44 @@
 
     <div id="settingSidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeSetting()">&times;</a>
-      <button type="deleteUserBtn" class="btn btn-danger" id="deleteBtn">Delete User</button>
-      <button type="addUserBtn" class="btn btn-danger" id="addUserBtn">Add User</button>
-      <button type="clickMeBtn" class="btn btn-danger" id="whatevaBtn">Click Me!</button>
+      <button type="deleteUserBtn" class="btn btn-primary" id="deleteBtn">Delete User</button>
+      <button type="addUserBtn" class="btn btn-primary" id="addUserBtn">Add User</button>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NotificationsModal" id="projectManagementBtn">
+        Send A Notification
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="NotificationsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Send a Notification</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="recipient">Select Recipient:</label>
+                  <select class="form-control" id="recipient">
+
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="form-control-label">Message:</label>
+                  <textarea class="form-control" id="message-text" style="margin-top: 0px; margin-bottom: 0px; height: 284px;"></textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="sendBtn">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
     </div>
@@ -70,10 +109,32 @@
           <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> EMPLOYEES</a></li>
           <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> APPROVALS</a></li>
           <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> SETTINGS</a></li>
+          <li><a data-toggle="modal" href="#noteModal" id="NotificationsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-envelope"></span> NOTIFICATIONS</a></li>
         </ul>
         <div id="topRight">
           <span id="userEmail"></span>
           <button type="button" id="logOutButton" class="btn btn-danger hide"><span class="glyphicon glyphicon-log-out"></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabe">Your Notifications</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="yourNotes">
+
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
@@ -106,6 +167,6 @@
         </div>
       </div>
     </div>
-  </body>
+    </body>
   <script  src="main.js"></script>
 </html>

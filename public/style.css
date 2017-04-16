@@ -240,3 +240,13 @@ a {
   color: #2E2E2E;
   align-content: center;
 }
+
+.dashboard{
+    overflow-y: scroll;
+}
+.modal-content{
+    color: #2E2E2E;
+}
+.dropdown-item{
+    color: #2E2E2E;
+}
