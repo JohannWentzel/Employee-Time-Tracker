@@ -367,7 +367,7 @@ function getProjects() {
 // Initialize the DHTMLX scheduler
 function init() {
   scheduler.config.start_on_monday = false; // Weeks start on Sunday
-  scheduler.init('scheduler_here', new Date(), "month");
+  scheduler.init('scheduler_here', new Date(), "week");
   scheduler.locale.labels.section_text = 'Description';
   scheduler.locale.labels.section_projects = 'Projects';
   scheduler.locale.labels.section_type = 'Type';
