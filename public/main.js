@@ -209,6 +209,21 @@ settingsBtn.addEventListener('click', e => {
 });
 
 function closeSideMenu() {
+    document.getElementById("employeeSidenav").style.width = "0";
+    }
+
+function closeProject() {
+    document.getElementById("projectSidenav").style.width = "0";
+    }
+
+function closeApproval() {
+    document.getElementById("approvalSidenav").style.width = "0";
+    }
+
+function closeSetting() {
+    document.getElementById("settingSidenav").style.width = "0";
+}
+
 projectManagementBtn.addEventListener('click', e => {
 
     var query = firebase.database().ref("Employee/").orderByKey();
