@@ -22,11 +22,8 @@
     <script type="text/javascript" src="/codebase/dhtmlx_scheduler_firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.0/d3.js"></script>
     <script src="https://rawgit.com/pablomolnar/radial-progress-chart/master/dist/radial-progress-chart.js"></script>
-
-
-
-
   </head>
+
   <!-- On load, initialize the DHTMLX Scheduler -->
   <body class="main" onload="init();" >
     <div id="employeeSidenav" class="sidenav">
@@ -43,7 +40,6 @@
       <a href="#" id="1">Project 1</a>
       <a href="#" id="2">Project 2</a>
       <a href="#" id="3">Project 3</a>
-
     </div>
 
     <div id="approvalSidenav" class="sidenav">
@@ -52,7 +48,6 @@
       <a href="#" id="3"></a>
       <a href="#" id="4"></a>
       <a href="#" id="5"></a>
-
     </div>
 
     <div id="settingSidenav" class="sidenav">
@@ -79,9 +74,7 @@
               <form>
                 <div class="form-group">
                   <label for="recipient">Select Recipient:</label>
-                  <select class="form-control" id="recipient">
-
-                  </select>
+                  <select class="form-control" id="recipient"></select>
                 </div>
                 <div class="form-group">
                   <label for="message-text" class="form-control-label">Message:</label>
@@ -117,7 +110,6 @@
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
-
     </div>
 
     <!-- Use any element to open the sidenav -->
@@ -156,15 +148,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="exampleModalLabe">Your Messages</h3>
-
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form id="yourNotes">
-
-            </form>
+            <form id="yourNotes"></form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NotificationsModal" id="projectManagementBtn">
@@ -179,13 +168,13 @@
     <div class="dashboard">
       <div class="col-sm-2">
         <div class="hours"><h2 class="hours_title text-center" style="color: #657383">This Week</h2></div>
-          <div>
-              <h2 style="color: #657383" class="text-center">Weekly Breakdown</h2>
+        <div>
+          <h2 style="color: #657383" class="text-center">Weekly Breakdown</h2>
           <div class="hours_by_type"></div>
-              <div style="color: #657383"> Red - Development Time</div>
-              <div style="color: #657383"> Green - Meeting Time</div>
-              <div style="color: #657383"> Blue - Other</div>
-          </div>
+          <div style="color: #657383"> Red - Development Time</div>
+          <div style="color: #657383"> Green - Meeting Time</div>
+          <div style="color: #657383"> Blue - Other</div>
+        </div>
         <div class="vacation"><h2 class="vacation_title text-center" style="color: #657383">Remaining Vacation</h2></div>
       </div>
       <div class="col-sm-10" id="calendar">
@@ -204,6 +193,6 @@
         </div>
       </div>
     </div>
-    </body>
+  </body>
   <script  src="main.js"></script>
 </html>
