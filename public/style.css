@@ -250,3 +250,7 @@ a {
 .dropdown-item{
     color: #2E2E2E;
 }
+#projectManagementBtn{
+    float: left;
+
+}

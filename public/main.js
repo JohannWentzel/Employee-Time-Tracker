@@ -116,12 +116,14 @@ firebase.auth().onAuthStateChanged(user => {
         projectsBtn.style.visibility = "visible";
         settingsBtn.style.visibility = "visible";
         approvalsBtn.style.visibility = "visible";
+        projectManagementBtn.visibility = "visible";
       }
       else {
         employeesBtn.remove();
         projectsBtn.remove();
         settingsBtn.remove();
         approvalsBtn.remove();
+        projectManagementBtn.remove();
       }
 
     // Manager wants to see all events for all UID's
@@ -225,6 +227,8 @@ function closeSideMenu() {
 
 projectManagementBtn.addEventListener('click', e => {
 
+    $('#noteModal').modal('hide');
+
     var query = firebase.database().ref("Employee/").orderByKey();
     query.once("value")
         .then(function(snapshot) {
@@ -255,7 +259,7 @@ sendBtn.addEventListener('click', e => {
     let a = document.getElementById("recipient");
     let recipient = a.options[a.selectedIndex].value;
     msg=document.getElementById("message-text").value;
-
+    if(msg.length > 0){
     //get uid of the recipient
     var query = firebase.database().ref("Employee/").orderByKey();
     query.once("value")
@@ -276,7 +280,7 @@ sendBtn.addEventListener('click', e => {
 
         });
 
-
+    }
 
     document.getElementById("message-text").value = "";
     $('#NotificationsModal').modal('hide');
@@ -291,8 +295,10 @@ saveProject.addEventListener('click', e => {
 
     name=document.getElementById("proj-name").value;
 
+    if(name.length > 0){
+        firebase.database().ref("Project").push(name);
+    }
 
-    firebase.database().ref("Project").push(name);
 
     document.getElementById("proj-name").value = "";
     $('#AddProjectModal').modal('hide');
