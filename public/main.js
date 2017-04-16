@@ -25,6 +25,8 @@ const approvalsBtn = document.getElementById('approvalsBtn');
 const projectManagementBtn = document.getElementById('projectManagementBtn');
 const sendBtn = document.getElementById('sendBtn');
 const NotificationsBtn = document.getElementById('NotificationsBtn');
+const addProjectBtn = document.getElementById('addProjectBtn');
+const saveProject = document.getElementById('saveProject');
 
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
@@ -278,6 +280,22 @@ sendBtn.addEventListener('click', e => {
 
     document.getElementById("message-text").value = "";
     $('#NotificationsModal').modal('hide');
+});
+
+addProjectBtn.addEventListener('click', e => {
+
+    $('#AddProjectModal').appendTo("body");
+});
+
+saveProject.addEventListener('click', e => {
+
+    name=document.getElementById("proj-name").value;
+
+
+    firebase.database().ref("Project").push(name);
+
+    document.getElementById("proj-name").value = "";
+    $('#AddProjectModal').modal('hide');
 });
 
 // function closeProject() {
