@@ -60,8 +60,9 @@
       <button type="deleteUserBtn" class="btn btn-primary" id="deleteBtn">Delete User</button>
       <button type="addUserBtn" class="btn btn-primary" id="addUserBtn">Add User</button>
       <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NotificationsModal" id="projectManagementBtn">
-        Send A Notification
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddProjectModal" id="addProjectBtn">
+        Add a Project
       </button>
 
       <!-- Modal -->
@@ -69,7 +70,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Send a Notification</h5>
+              <h3 class="modal-title" id="exampleModalLabel">Send a Notification</h3>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -96,6 +97,26 @@
         </div>
       </div>
 
+      <div class="modal fade" id="AddProjectModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Add a Project</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="message-text" class="form-control-label">Project Name:</label>
+                <textarea class="form-control" id="proj-name" style="margin-top: 0px; margin-bottom: 0px; height: 75px;"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id='saveProject' class="btn btn-primary">Save & Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
 
     </div>
 
@@ -122,7 +143,8 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabe">Your Notifications</h5>
+            <h3 class="modal-title" id="exampleModalLabe">Your Notifications</h3>
+
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -133,6 +155,9 @@
             </form>
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NotificationsModal" id="projectManagementBtn">
+              <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Send A Notification
+            </button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>

@@ -25,6 +25,8 @@ const approvalsBtn = document.getElementById('approvalsBtn');
 const projectManagementBtn = document.getElementById('projectManagementBtn');
 const sendBtn = document.getElementById('sendBtn');
 const NotificationsBtn = document.getElementById('NotificationsBtn');
+const addProjectBtn = document.getElementById('addProjectBtn');
+const saveProject = document.getElementById('saveProject');
 
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
@@ -112,12 +114,14 @@ firebase.auth().onAuthStateChanged(user => {
         projectsBtn.style.visibility = "visible";
         settingsBtn.style.visibility = "visible";
         approvalsBtn.style.visibility = "visible";
+        projectManagementBtn.visibility = "visible";
       }
       else {
         employeesBtn.remove();
         projectsBtn.remove();
         settingsBtn.remove();
         approvalsBtn.remove();
+        projectManagementBtn.remove();
       }
 
     // Manager wants to see all events for all UID's
@@ -239,11 +243,22 @@ sendBtn.addEventListener('click', e => {
   let a = document.getElementById("recipient");
   let recipient = a.options[a.selectedIndex].value;
   msg = document.getElementById("message-text").value;
-
-  // Get uid of the recipient
+  if(msg.length > 0){
+  //get uid of the recipient
   var query = firebase.database().ref("Employee/").orderByKey();
   query.once("value")
-  .then(function(snapshot) {
+    .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          // key will be "ada" the first time and "alan" the second time
+          var key = childSnapshot.key;
+          var childData = childSnapshot.val();
+          let employee_first=childData["firstName"];
+          let employee_last=childData["lastName"];
+          let full=employee_first+" "+employee_last;
+          if (full === recipient){
+            firebase.database().ref("Notification/"+key).push(msg);
+          }
+        });
 
     snapshot.forEach(function(childSnapshot) {
       // key will be "ada" the first time and "alan" the second time
@@ -253,15 +268,31 @@ sendBtn.addEventListener('click', e => {
       let employee_last = childData["lastName"];
       let full = employee_first + " " + employee_last;
       if (full === recipient){
-
         firebase.database().ref("Notification/"+key).push(msg);
       }
     });
-
   });
-
+  }
 document.getElementById("message-text").value = "";
 $('#NotificationsModal').modal('hide');
+});
+
+addProjectBtn.addEventListener('click', e => {
+
+    $('#AddProjectModal').appendTo("body");
+});
+
+saveProject.addEventListener('click', e => {
+
+    name=document.getElementById("proj-name").value;
+
+    if(name.length > 0){
+        firebase.database().ref("Project").push(name);
+    }
+
+
+    document.getElementById("proj-name").value = "";
+    $('#AddProjectModal').modal('hide');
 });
 
 // function closeProject() {
