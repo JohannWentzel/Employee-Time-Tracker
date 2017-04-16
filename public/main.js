@@ -33,7 +33,7 @@ firebase.auth().onAuthStateChanged(user => {
     showUser.innerText = user.email;
     btnLogOut.classList.remove('hide');
 
-    let email ="";
+    let email = "";
     let type = "";
     let name = "";
     // Populate the calendar and anything else that has to do with the uniqe ID on load
@@ -43,27 +43,24 @@ firebase.auth().onAuthStateChanged(user => {
       name = snapshot.child("name").val();
       type = snapshot.child("type").val();
       email = snapshot.child("email").val();
-      vacation1=snapshot.child("vacation").val();
+      vacation1 = snapshot.child("vacation").val();
       vacation.update(vacation1)
     });
     //console.log(UID);
     let dbNotes = database.ref().child('Notification/'+UID);
 
     dbNotes.on('value', snapshot => {
-        let html='';
-        let c = 0;
-        snapshot.forEach(function(childSnapshot) {
-                c=c+1;
-                html += "<div class=\"well\">"+childSnapshot.val()+"</div>";
-
-            });
-        document.getElementById('yourNotes').innerHTML = html;
-        if(c!=0){
-            document.getElementById('note_badge').innerHTML = c;
-        }
-
+      let html = '';
+      let c = 0;
+      snapshot.forEach(function(childSnapshot) {
+        c = c + 1;
+        html += "<div class=\"well\">"+childSnapshot.val()+"</div>";
+      });
+      document.getElementById('yourNotes').innerHTML = html;
+      if(c != 0) {
+        document.getElementById('note_badge').innerHTML = c;
+      }
     });
-
 
     let dbEvents = database.ref().child('Events/'+UID);
 
@@ -90,22 +87,23 @@ firebase.auth().onAuthStateChanged(user => {
         if (start >= mondayOfWeek && start <= sundayOfWeek){
           totalHours = totalHours + duration;
           if (type === '1'){
-              totalDev = totalDev+duration;
+            totalDev = totalDev+duration;
           }
           else if (type == '2'){
-              totalMeeting = totalMeeting+duration;
+            totalMeeting = totalMeeting+duration;
           }
           else{
-              totalOther=totalOther+duration;
+            totalOther=totalOther+duration;
           }
         }
       });
       scheduler.firebase(dbEvents); // Set events to the scheduler
       hours.update(totalHours);
-        hoursByType.update([totalOther,totalMeeting,totalDev])
+      hoursByType.update([totalOther,totalMeeting,totalDev])
     });
 
     // Display navbar if the user is a Manager
+    // A painful way of returning a promise begins
     return firebase.database().ref('/Employee/' + UID).once('value').then(function(snapshot) {
       let userType = snapshot.child("type").val();
 
@@ -129,9 +127,7 @@ firebase.auth().onAuthStateChanged(user => {
       dbEvents2.on('value', snapshot => {
         snapshot.forEach(function (allEventsSnapshot) {
           console.log(allEventsSnapshot);
-
         });
-        // Set events to the scheduler
       });
     }
     });
@@ -195,7 +191,6 @@ approvalsBtn.addEventListener('click', e => {
   document.getElementById("1").innerText = "Approval1";
   document.getElementById("2").innerText = "Approval2";
   document.getElementById("3").innerText = "Approval3";
-
 });
 
 // Navbar Setting
@@ -210,74 +205,63 @@ settingsBtn.addEventListener('click', e => {
   document.getElementById("1").innerText = "Delete user";
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
-
 });
 
 function closeSideMenu() {
-    document.getElementById("employeeSidenav").style.width = "0";
-    document.getElementById("projectSidenav").style.width = "0";
-    document.getElementById("approvalSidenav").style.width = "0";
-    document.getElementById("settingSidenav").style.width = "0";
-    }
-
+  document.getElementById("employeeSidenav").style.width = "0";
+  document.getElementById("projectSidenav").style.width = "0";
+  document.getElementById("approvalSidenav").style.width = "0";
+  document.getElementById("settingSidenav").style.width = "0";
+}
 
 projectManagementBtn.addEventListener('click', e => {
+  var query = firebase.database().ref("Employee/").orderByKey();
+  query.once("value")
+  .then(function(snapshot) {
+    html = '';
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+      var key = childSnapshot.key;
+      var childData = childSnapshot.val();
+      let employee_first = childData["firstName"];
+      let employee_last = childData["lastName"];
+      let type = childData["type"];
 
-    var query = firebase.database().ref("Employee/").orderByKey();
-    query.once("value")
-        .then(function(snapshot) {
-            html='';
-            snapshot.forEach(function(childSnapshot) {
-                // key will be "ada" the first time and "alan" the second time
-                var key = childSnapshot.key;
-                var childData = childSnapshot.val();
-                let employee_first=childData["firstName"];
-                let employee_last=childData["lastName"];
-                let type = childData["type"];
+      html += "<option>" + employee_first + " " + employee_last + "</option>";
+    });
+    document.getElementById('recipient').innerHTML = html;
+  });
 
-                html += "<option>"+employee_first+" "+employee_last+"</option>";
-
-
-            });
-            document.getElementById('recipient').innerHTML = html;
-        });
-
-
-
-
-    $('#NotificationsModal').appendTo("body");
+$('#NotificationsModal').appendTo("body");
 });
 
 sendBtn.addEventListener('click', e => {
+  let a = document.getElementById("recipient");
+  let recipient = a.options[a.selectedIndex].value;
+  msg = document.getElementById("message-text").value;
 
-    let a = document.getElementById("recipient");
-    let recipient = a.options[a.selectedIndex].value;
-    msg=document.getElementById("message-text").value;
+  // Get uid of the recipient
+  var query = firebase.database().ref("Employee/").orderByKey();
+  query.once("value")
+  .then(function(snapshot) {
 
-    //get uid of the recipient
-    var query = firebase.database().ref("Employee/").orderByKey();
-    query.once("value")
-        .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+      var key = childSnapshot.key;
+      var childData = childSnapshot.val();
+      let employee_first = childData["firstName"];
+      let employee_last = childData["lastName"];
+      let full = employee_first + " " + employee_last;
+      if (full === recipient){
 
-            snapshot.forEach(function(childSnapshot) {
-                // key will be "ada" the first time and "alan" the second time
-                var key = childSnapshot.key;
-                var childData = childSnapshot.val();
-                let employee_first=childData["firstName"];
-                let employee_last=childData["lastName"];
-                let full=employee_first+" "+employee_last;
-                if (full === recipient){
+        firebase.database().ref("Notification/"+key).push(msg);
+      }
+    });
 
-                    firebase.database().ref("Notification/"+key).push(msg);
-                }
-            });
+  });
 
-        });
-
-
-
-    document.getElementById("message-text").value = "";
-    $('#NotificationsModal').modal('hide');
+document.getElementById("message-text").value = "";
+$('#NotificationsModal').modal('hide');
 });
 
 // function closeProject() {
@@ -310,52 +294,69 @@ var hours = new RadialProgressChart('.hours', {
 });
 
 var vacation = new RadialProgressChart('.vacation', {
-    diameter: 100,
+  diameter: 100,
     stroke:{
-        width: 20,
-        gap: 2
+      width: 20,
+    gap: 2
     },
     max: 15,
     round: false,
     series: [{
-        value: 0,
-        color: ['#82CAFF', '#151B54']
+      value: 0,
+    color: ['#82CAFF', '#151B54']
     }],
     center: function(d) {
-        return d.toFixed(1) + ' DAYS'
-    }
+              return d.toFixed(1) + ' DAYS'
+            }
 });
 
 var hoursByType = new RadialProgressChart('.hours_by_type', {
-    diameter: 130,
+  diameter: 130,
     max: 40,
     series: [
-        {labelStart: '\uF106', value: 15, color: ['#43C6DB','#2B65EC']},
-        {labelStart: '\uF101', value: 35, color: ['#79F7CF', '#41A317']},
-        {labelStart: '\uF105', value: 20, color: ['#F778A1', '#F70D1A']}
-    ]}
-);
+{labelStart: '\uF106', value: 15, color: ['#43C6DB','#2B65EC']},
+{labelStart: '\uF101', value: 35, color: ['#79F7CF', '#41A317']},
+{labelStart: '\uF105', value: 20, color: ['#F778A1', '#F70D1A']}
+]
+});
 
-
+function getProjects() {
+  let project = database.ref().child('Project/');
+  var array = [];
+  // Read the Projects from Firebase
+  var deferred = $.Deferred(); // Magical defer 
+  project.once('value')
+    .then(snapshot => {
+      snapshot.forEach(allProjectsSnapshot => {
+        console.log(array);
+        array.push(allProjectsSnapshot.val());
+      });
+      deferred.resolve(array);
+    });
+  return deferred.promise();
+};
 
 // Initialize the DHTMLX scheduler
 function init() {
   scheduler.config.start_on_monday = false; // Weeks start on Sunday
   scheduler.init('scheduler_here', new Date(), "month");
   scheduler.locale.labels.section_text = 'Description';
-  scheduler.locale.labels.section_projects= 'Projects';
+  scheduler.locale.labels.section_projects = 'Projects';
   scheduler.locale.labels.section_type = 'Type';
 
   // Day/week views will show the expanded event lightbox
   scheduler.config.details_on_create = true;
   scheduler.config.details_on_dblclick = true;
 
-  // Project labels are currently placeholders
-  var project_opts = [
-  { key: 1, label: 'Project 1' },
-  { key: 2, label: 'Project 2' },
-  { key: 3, label: 'Project 3' }
-  ];
+  promise = getProjects();
+  project_opts = []; 
+  promise.then(projectArray => {
+    console.log(projectArray);
+    for (i = 0; i < projectArray.length; i++) {
+      project_opts.push({ key: i, label: projectArray[i] });
+    }
+    console.log(project_opts);
+  });
 
   var type_opts = [
   { key: 1, label: 'Development' },
