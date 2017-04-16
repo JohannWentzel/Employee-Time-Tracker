@@ -51,12 +51,17 @@ firebase.auth().onAuthStateChanged(user => {
 
     dbNotes.on('value', snapshot => {
         let html='';
+        let c = 0;
         snapshot.forEach(function(childSnapshot) {
-
+                c=c+1;
                 html += "<div class=\"well\">"+childSnapshot.val()+"</div>";
 
             });
         document.getElementById('yourNotes').innerHTML = html;
+        if(c!=0){
+            document.getElementById('note_badge').innerHTML = c;
+        }
+
     });
 
 
@@ -274,24 +279,6 @@ sendBtn.addEventListener('click', e => {
     document.getElementById("message-text").value = "";
     $('#NotificationsModal').modal('hide');
 });
-
-
-
-function closeEmployee() {
-  document.getElementById("employeeSidenav").style.width = "0";
-}
-
-function closeProject() {
-  document.getElementById("projectSidenav").style.width = "0";
-}
-
-function closeApproval() {
-  document.getElementById("approvalSidenav").style.width = "0";
-}
-
-function closeSetting() {
-  document.getElementById("settingSidenav").style.width = "0";
-}
 
 // function closeProject() {
 //   document.getElementById("projectSidenav").style.width = "0";
