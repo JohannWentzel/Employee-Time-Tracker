@@ -126,11 +126,11 @@
     <div id="main" >
       <div class="navbar" id="navbar">
         <ul id="navbar-ul">
-          <li><a href="#" id="projectsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> PROJECTS</a></li>
-          <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> EMPLOYEES</a></li>
-          <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> APPROVALS</a></li>
-          <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> SETTINGS</a></li>
-          <li><a data-toggle="modal" href="#noteModal" id="NotificationsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-envelope"></span> MESSAGES <span id="note_badge" class="badge"></span></a></li>
+          <li><a href="#" id="projectsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> Projects</a></li>
+          <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> Employees</a></li>
+          <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> Approvals</a></li>
+          <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+          <li><a data-toggle="modal" href="#noteModal" id="NotificationsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-envelope"></span> Messages <span id="note_badge" class="badge"></span></a></li>
         </ul>
         <div id="topRight">
           <span id="userEmail"></span>
@@ -143,7 +143,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabe">Your Notifications</h3>
+            <h3 class="modal-title" id="exampleModalLabe">Your Messages</h3>
 
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -156,7 +156,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#NotificationsModal" id="projectManagementBtn">
-              <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Send A Notification
+              <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  Send A Message
             </button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -166,15 +166,15 @@
 
     <div class="dashboard">
       <div class="col-md-2">
-        <div class="hours"><h2 class="hours_title" style="color: #657383">Weekly Hours</h2></div>
+        <div class="hours"><h2 class="hours_title text-center" style="color: #657383">This Week</h2></div>
           <div>
-              <h2 style="color: #657383">Hours By Type</h2>
+              <h2 style="color: #657383" class="text-center">Weekly Breakdown</h2>
           <div class="hours_by_type"></div>
               <div style="color: #657383"> Red - Development Time</div>
               <div style="color: #657383"> Green - Meeting Time</div>
               <div style="color: #657383"> Blue - Other</div>
           </div>
-        <div class="vacation"><h2 class="vacation_title" style="color: #657383">Remaining Vacation</h2></div>
+        <div class="vacation"><h2 class="vacation_title text-center" style="color: #657383">Remaining Vacation</h2></div>
       </div>
       <div class="col-md-10" id="calendar">
         <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:90%; padding:10px;'>
