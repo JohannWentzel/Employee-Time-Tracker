@@ -157,7 +157,7 @@ employeesBtn.addEventListener('click', e => {
   document.getElementById("employeeSidenav").style.width = "250px";
   // Loop through "Employee" to get data of every Employee in the data base
   var index = 1;
-  var query = firebase.database().ref("Employee/").orderByKey();
+  var query = firebase.database().ref("Employee/");
   query.once("value")
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -179,9 +179,19 @@ projectsBtn.addEventListener('click', e => {
 
   //open project side menu
   document.getElementById("projectSidenav").style.width = "250px";
-  document.getElementById("1").innerText = "Project1";
-  document.getElementById("2").innerText = "Project2";
-  document.getElementById("3").innerText = "Project3";
+  var index = 1;
+  var query = firebase.database().ref("Project/");
+  query.once("value")
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+      var key = childSnapshot.key;
+      var childData = childSnapshot.val();
+      document.getElementById("project"+index.toString()).innerText = childData;
+      index++;
+    });
+  });
+
 });
 
 // Navbar approvals
@@ -314,7 +324,7 @@ var hours = new RadialProgressChart('.hours', {
   round: false,
   series: [{
     value: 0,
-    color: ['red', '#7CFC00']
+    color: ['#7CFC00','red']
   }],
   center: function(d) {
             return d.toFixed(2) + ' HOURS'
