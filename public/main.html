@@ -124,19 +124,31 @@
     <!--  <span onclick="openNav()">open</span> -->
 
     <div id="main" >
-      <div class="navbar" id="navbar">
-        <ul id="navbar-ul">
-          <li><a href="#" id="projectsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> Projects</a></li>
-          <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> Employees</a></li>
-          <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> Approvals</a></li>
-          <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
-          <li><a data-toggle="modal" href="#noteModal" id="NotificationsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-envelope"></span> Messages <span id="note_badge" class="badge"></span></a></li>
-        </ul>
-        <div id="topRight">
-          <span id="userEmail"></span>
-          <button type="button" id="logOutButton" class="btn btn-danger hide"><span class="glyphicon glyphicon-log-out"></span></button>
+      <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-ul" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbar-ul">
+            <ul class="nav navbar-nav" id="navbar-btns">
+              <li><a href="#" id="projectsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> Projects</a></li>
+              <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> Employees</a></li>
+              <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> Approvals</a></li>
+              <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+              <li><a data-toggle="modal" href="#noteModal" id="NotificationsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-envelope"></span> Messages <span id="note_badge" class="badge"></span></a></li>
+              <div class="nav navbar-nav"id="topRight">
+                <span id="userEmail"></span>
+                <button type="button" id="logOutButton" class="btn btn-danger hide"><span class="glyphicon glyphicon-log-out"></span></button>
+              </div>
+            </ul>
+          </div>
         </div>
       </div>
+      </nav>
     </div>
 
     <div class="modal fade bd-example-modal-lg" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

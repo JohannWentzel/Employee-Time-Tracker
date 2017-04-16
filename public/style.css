@@ -83,17 +83,12 @@ a {
   background-color: #10CBE8;
   border-radius: 0px;
   display: flex;
-  margin: 0;
 }
 
 .navbar ul {
-  float: left;
   list-style-type: none;
-  margin: 0;
   padding: 10px;
-  padding-left: 10%;
   text-align: center;
-  width: 90%;
 }
 
 .navbar li {
@@ -124,7 +119,7 @@ a {
 
 #logOutButton {
   background-color: #EF5350;
-  height: 40px;
+  height: 44px;
   float: right;
 }
 
@@ -132,12 +127,12 @@ a {
   background-color: #E53935;
 }
 
-#navbar-ul li a {
+#navbar-btns li a {
   border-radius: 5px;
   font-size: 18px;
   font-weight: 600;
-  height: 40px;
-  margin: auto 2%;
+  padding: 10px;
+  margin: auto 5px;
 }
 
 #submitButton {
@@ -156,8 +151,6 @@ a {
 #topRight {
   align-items: center;
   display: flex;
-  position: absolute;
-  right: 10px;
 }
 
 #userEmail {
