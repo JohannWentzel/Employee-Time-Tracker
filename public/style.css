@@ -253,3 +253,10 @@ a {
 #projectManagementBtn {
   float: left;
 }
+
+.settingsBtn{
+    width:80%;
+    margin:0 auto;
+    margin-top: 10px;
+    
+}
