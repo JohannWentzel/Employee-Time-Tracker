@@ -1,4 +1,3 @@
-
 // Initialize Firebase
 var config = {
   apiKey: "AIzaSyCiTqWN0OhnaaQibMzHgL5itpqQX1bnEo8",
@@ -40,7 +39,7 @@ firebase.auth().onAuthStateChanged(user => {
     let name = "";
     // Populate the calendar and anything else that has to do with the uniqe ID on load
     // Database can be updated later using the email from the page it self
-    let dbEmployee = database.ref().child("Employee/"+UID);
+    let dbEmployee = database.ref().child("Employee/" + UID);
     dbEmployee.once("value").then( snapshot => {
       name = snapshot.child("name").val();
       type = snapshot.child("type").val();
@@ -49,14 +48,14 @@ firebase.auth().onAuthStateChanged(user => {
       vacation.update(vacation1)
     });
     //console.log(UID);
-    let dbNotes = database.ref().child('Notification/'+UID);
+    let dbNotes = database.ref().child('Notification/' + UID);
 
     dbNotes.on('value', snapshot => {
       let html = '';
       let c = 0;
       snapshot.forEach(function(childSnapshot) {
         c = c + 1;
-        html += "<div class=\"well\">"+childSnapshot.val()+"</div>";
+        html += "<div class=\"well\">" + childSnapshot.val() + "</div>";
       });
       document.getElementById('yourNotes').innerHTML = html;
       if(c != 0) {
@@ -129,13 +128,14 @@ firebase.auth().onAuthStateChanged(user => {
       let dbEvents2 = database.ref().child('Events/');
       // Read the Events from Firebase
       dbEvents2.on('value', snapshot => {
-        snapshot.forEach(function (allEventsSnapshot) {
+        snapshot.forEach(allEventsSnapshot => {
           console.log(allEventsSnapshot);
         });
       });
     }
     });
-  } else {
+  } 
+  else {
     window.location.href = "login.html";
   }
 });
@@ -252,9 +252,9 @@ sendBtn.addEventListener('click', e => {
           // key will be "ada" the first time and "alan" the second time
           var key = childSnapshot.key;
           var childData = childSnapshot.val();
-          let employee_first=childData["firstName"];
-          let employee_last=childData["lastName"];
-          let full=employee_first+" "+employee_last;
+          let employee_first = childData["firstName"];
+          let employee_last = childData["lastName"];
+          let full = employee_first+" "+employee_last;
           if (full === recipient){
             firebase.database().ref("Notification/"+key).push(msg);
           }
@@ -278,21 +278,17 @@ $('#NotificationsModal').modal('hide');
 });
 
 addProjectBtn.addEventListener('click', e => {
-
-    $('#AddProjectModal').appendTo("body");
+  $('#AddProjectModal').appendTo("body");
 });
 
 saveProject.addEventListener('click', e => {
+  name = document.getElementById("proj-name").value;
 
-    name=document.getElementById("proj-name").value;
-
-    if(name.length > 0){
-        firebase.database().ref("Project").push(name);
-    }
-
-
-    document.getElementById("proj-name").value = "";
-    $('#AddProjectModal').modal('hide');
+  if(name.length > 0){
+    firebase.database().ref("Project").push(name);
+  }
+  document.getElementById("proj-name").value = "";
+  $('#AddProjectModal').modal('hide');
 });
 
 // function closeProject() {
@@ -309,46 +305,46 @@ saveProject.addEventListener('click', e => {
 
 var hours = new RadialProgressChart('.hours', {
   diameter: 100,
-    stroke:{
-      width: 20,
+  stroke:{
+    width: 20,
     gap: 2
-    },
-    max: 40,
-    round: false,
-    series: [{
-      value: 0,
+  },
+  max: 40,
+  round: false,
+  series: [{
+    value: 0,
     color: ['red', '#7CFC00']
-    }],
-    center: function(d) {
-              return d.toFixed(2) + ' HOURS'
-            }
+  }],
+  center: function(d) {
+            return d.toFixed(2) + ' HOURS'
+          }
 });
 
 var vacation = new RadialProgressChart('.vacation', {
   diameter: 100,
-    stroke:{
-      width: 20,
+  stroke:{
+    width: 20,
     gap: 2
-    },
-    max: 15,
-    round: false,
-    series: [{
-      value: 0,
+  },
+  max: 15,
+  round: false,
+  series: [{
+    value: 0,
     color: ['#82CAFF', '#151B54']
-    }],
-    center: function(d) {
-              return d.toFixed(1) + ' DAYS'
-            }
+  }],
+  center: function(d) {
+            return d.toFixed(1) + ' DAYS'
+          }
 });
 
 var hoursByType = new RadialProgressChart('.hours_by_type', {
   diameter: 130,
-    max: 40,
-    series: [
-{labelStart: '\uF106', value: 15, color: ['#43C6DB','#2B65EC']},
-{labelStart: '\uF101', value: 35, color: ['#79F7CF', '#41A317']},
-{labelStart: '\uF105', value: 20, color: ['#F778A1', '#F70D1A']}
-]
+  max: 40,
+  series: [
+    {labelStart: '\uF106', value: 15, color: ['#43C6DB','#2B65EC']},
+    {labelStart: '\uF101', value: 35, color: ['#79F7CF', '#41A317']},
+    {labelStart: '\uF105', value: 20, color: ['#F778A1', '#F70D1A']}
+  ]
 });
 
 function getProjects() {
@@ -359,7 +355,7 @@ function getProjects() {
   project.once('value')
     .then(snapshot => {
       snapshot.forEach(allProjectsSnapshot => {
-        console.log(array);
+        //console.log(array);
         array.push(allProjectsSnapshot.val());
       });
       deferred.resolve(array);
@@ -382,11 +378,9 @@ function init() {
   promise = getProjects();
   project_opts = []; 
   promise.then(projectArray => {
-    console.log(projectArray);
     for (i = 0; i < projectArray.length; i++) {
       project_opts.push({ key: i, label: projectArray[i] });
     }
-    console.log(project_opts);
   });
 
   var type_opts = [
