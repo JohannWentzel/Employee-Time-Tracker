@@ -104,7 +104,7 @@ firebase.auth().onAuthStateChanged(user => {
     return firebase.database().ref('/Employee/' + UID).once('value').then(function(snapshot) {
       let userType = snapshot.child("type").val();
 
-      if(userType == "Manager" || userType == "Admin"){
+      if(userType == "Manager"){
         employeesBtn.style.visibility = "visible";
         projectsBtn.style.visibility = "visible";
         settingsBtn.style.visibility = "visible";
@@ -143,6 +143,11 @@ btnLogOut.addEventListener('click', e => {
 
 // Manager's navbar-employee button
 employeesBtn.addEventListener('click', e => {
+  //close other sidemenus
+  document.getElementById("projectSidenav").style.width = "0";
+  document.getElementById("approvalSidenav").style.width = "0";
+  document.getElementById("settingSidenav").style.width = "0";
+
   // Displays a container with all employees in the database
   document.getElementById("employeeSidenav").style.width = "250px";
   // Loop through "Employee" to get data of every Employee in the data base
@@ -162,7 +167,12 @@ employeesBtn.addEventListener('click', e => {
 
 // Navbar projects
 projectsBtn.addEventListener('click', e => {
+  //close other sidemenu opens
+  document.getElementById("approvalSidenav").style.width = "0";
+  document.getElementById("settingSidenav").style.width = "0";
+  document.getElementById("employeeSidenav").style.width = "0";
 
+  //open project side menu
   document.getElementById("projectSidenav").style.width = "250px";
   document.getElementById("1").innerText = "Project1";
   document.getElementById("2").innerText = "Project2";
@@ -171,7 +181,11 @@ projectsBtn.addEventListener('click', e => {
 
 // Navbar approvals
 approvalsBtn.addEventListener('click', e => {
-
+  //close other sidemenu open
+  document.getElementById("employeeSidenav").style.width = "0";
+  document.getElementById("projectSidenav").style.width = "0";
+  document.getElementById("settingSidenav").style.width = "0";
+  //open approval sidemenu
   document.getElementById("approvalSidenav").style.width = "250px";
   document.getElementById("1").innerText = "Approval1";
   document.getElementById("2").innerText = "Approval2";
@@ -181,7 +195,12 @@ approvalsBtn.addEventListener('click', e => {
 
 // Navbar Setting
 settingsBtn.addEventListener('click', e => {
+  //close other sidemnu open
+  document.getElementById("employeeSidenav").style.width = "0";
+  document.getElementById("projectSidenav").style.width = "0";
+  document.getElementById("approvalSidenav").style.width = "0";
 
+  //open settings side menu
   document.getElementById("settingSidenav").style.width = "250px";
   document.getElementById("1").innerText = "Delete user";
   document.getElementById("2").innerText = "Add User";
@@ -189,6 +208,7 @@ settingsBtn.addEventListener('click', e => {
 
 });
 
+function closeSideMenu() {
 projectManagementBtn.addEventListener('click', e => {
 
     var query = firebase.database().ref("Employee/").orderByKey();
@@ -265,6 +285,18 @@ function closeApproval() {
 function closeSetting() {
   document.getElementById("settingSidenav").style.width = "0";
 }
+
+// function closeProject() {
+//   document.getElementById("projectSidenav").style.width = "0";
+// }
+//
+// function closeApproval() {
+//   document.getElementById("approvalSidenav").style.width = "0";
+// }
+//
+// function closeSetting() {
+//   document.getElementById("settingSidenav").style.width = "0";
+// }
 
 var hours = new RadialProgressChart('.hours', {
   diameter: 100,

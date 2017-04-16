@@ -10,10 +10,15 @@ var config = {
 // Create & initializes the Firebase app instance
 firebase.initializeApp(config);
 
+// Get a reference to the database service
+var database = firebase.database();
+
 // Get UI element references
 const txtEmail = document.getElementById('txtEmail');
 const txtPassword = document.getElementById('txtPassword');
 const txtConfirmPassword = document.getElementById('txtConfirmPassword');
+const txtFirstName = document.getElementById('txtFirstName');
+const txtLastName = document.getElementById('txtLastName');
 const typeSelect = document.getElementById('typeSelect');
 const btnLogin = document.getElementById('loginButton');
 const btnSubmit = document.getElementById('submitButton');
@@ -48,6 +53,8 @@ btnSignUp.addEventListener('click', f => {
   btnCancel.classList.remove('hide');
   btnSubmit.classList.remove('hide');
   txtConfirmPassword.classList.remove('hide');
+  txtFirstName.classList.remove('hide');
+  txtLastName.classList.remove('hide');
   typeSelect.classList.remove('hide');
 });
 
@@ -58,6 +65,8 @@ btnCancel.addEventListener('click', f => {
   btnCancel.classList.add('hide');
   btnSubmit.classList.add('hide');
   txtConfirmPassword.classList.add('hide');
+  txtFirstName.classList.add('hide');
+  txtLastName.classList.add('hide');
   typeSelect.classList.add('hide');
 });
 
@@ -66,10 +75,11 @@ btnSubmit.addEventListener('click', e => {
   const email = txtEmail.value;
   const password = txtPassword.value;
   const confirmPassword = txtConfirmPassword.value;
+  const firstName = txtFirstName.value;
+  const lastName = txtLastName.value;
   const type = typeSelect.value;
-  console.log(type);
 
-  var fields = [email, password, confirmPassword];
+  var fields = [email, password, confirmPassword, firstName, lastName];
 
   if (areNull(fields)) {
     alertMsg.innerHTML = "<strong>Stop!</strong> One or more of your fields are empty.";
@@ -85,7 +95,21 @@ btnSubmit.addEventListener('click', e => {
 
   const auth = firebase.auth();
   const promise = auth.createUserWithEmailAndPassword(email,password);
-  promise.catch(e => console.log(e.message));
+
+  var dbRef= database.ref();
+
+  promise.then(val => {
+    dbRef.child('Employee/' + val.uid).set({
+      email : email,
+      firstName : firstName,
+      lastName : lastName,
+      type : type,
+      vacation: 0
+    });
+  }).catch(e => {
+    console.log(e.message);
+    return;
+  });
 });
 
 // Firebase authentication listener
