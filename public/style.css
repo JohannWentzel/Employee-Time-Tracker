@@ -2,7 +2,6 @@ body {
   background: #EAB5FB;
   color: #FFF;
   font-family: Roboto, Arial, sans-serif;
-  height: 100vh;
   margin: 0px;
   overflow: hidden;
   padding: 0px;
@@ -166,8 +165,6 @@ a {
   margin-right: 10px;
 }
 
-
-
 /* The side navigation menu */
 .sidenav {
   height: 100%; /* 100% Full-height */
@@ -227,7 +224,7 @@ a {
   font-size: 15px;
 }
 
-#calendar{
+#calendar {
   height: 100%;
 }
 
@@ -235,22 +232,24 @@ a {
   height: 100vh;
 }
 
-.left_menu_titles{
+.left_menu_titles {
   border-top: medium;
   color: #2E2E2E;
   align-content: center;
 }
 
-.dashboard{
-    overflow-y: scroll;
+.dashboard {
+  overflow-y: scroll;
 }
-.modal-content{
-    color: #2E2E2E;
-}
-.dropdown-item{
-    color: #2E2E2E;
-}
-#projectManagementBtn{
-    float: left;
 
+.modal-content {
+  color: #2E2E2E;
+}
+
+.dropdown-item {
+  color: #2E2E2E;
+}
+
+#projectManagementBtn {
+  float: left;
 }
