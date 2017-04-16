@@ -219,6 +219,7 @@ function closeSideMenu() {
 }
 
 projectManagementBtn.addEventListener('click', e => {
+    $('#noteModal').modal('hide');
   var query = firebase.database().ref("Employee/").orderByKey();
   query.once("value")
   .then(function(snapshot) {
