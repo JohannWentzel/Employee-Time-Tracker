@@ -100,9 +100,11 @@ firebase.auth().onAuthStateChanged(user => {
           else{
             totalOther=totalOther+duration;
           }
-            if (type == '4'){
+            
+        }
+          // note: currently counts all vacation you've EVER taken.
+        if (type == '4'){
                 totalVacation = totalVacation - duration/8;
-            }
         }
       });
       scheduler.firebase(dbEvents); // Set events to the scheduler
