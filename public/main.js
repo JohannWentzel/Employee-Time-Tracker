@@ -30,6 +30,8 @@ const VacationManagement = document.getElementById('VacationManagement');
 const setVacation = document.getElementById('setVacation');
 
 var vacationDays = 0;
+var currentEmployeeList = [];
+var projectList =[];
 
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
@@ -216,8 +218,20 @@ employeesBtn.addEventListener('click', e => {
 	 
 	 });
   
-      document.getElementById("employee"+index.toString()).innerText = childData["firstName"] +" " +childData["lastName"] + "\n ("+ totalHours.toFixed(1) +" hours worked)";
-      index++;
+      if(!currentEmployeeList.includes(key)) 
+        {
+        currentEmployeeList.push(key);
+        var list = document.getElementById('employeeList');
+        var entry = document.createElement('li');
+        entry.setAttribute("id","employee"+key);
+        entry.setAttribute("class","list-group");
+        entry.appendChild(document.createTextNode(childData["firstName"] +" " +childData["lastName"] + "\n ("+ totalHours.toFixed(1) +" hours worked)"));
+        list.appendChild(entry);
+        document.getElementById("employee"+key).innerText = childData["firstName"] +" " +childData["lastName"] + "\n ("+ totalHours.toFixed(1) +" hours worked)";
+        }
+     else{    
+        document.getElementById("employee"+key).innerText = childData["firstName"] +" " +childData["lastName"] + "\n ("+ totalHours.toFixed(1) +" hours worked)";
+        }
     });
   });
 });
@@ -241,8 +255,20 @@ projectsBtn.addEventListener('click', e => {
       // key will be "ada" the first time and "alan" the second time
       var key = childSnapshot.key;
       var childData = childSnapshot.val();
-      document.getElementById("project"+index.toString()).innerText = childData;
-      index++;
+        if(!projectList.includes(key)) 
+        {
+        projectList.push(key);
+        var list = document.getElementById('projectList');
+        var entry = document.createElement('li');
+        entry.setAttribute("id","project"+key);
+        entry.setAttribute("class","list-group");
+        entry.appendChild(document.createTextNode(childData));
+        list.appendChild(entry);
+     
+        }
+     else{    
+        document.getElementById("project"+key).innerText = childData;
+        }
     });
   });
 
