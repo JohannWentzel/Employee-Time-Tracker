@@ -78,9 +78,17 @@ btnSubmit.addEventListener('click', e => {
   const firstName = txtFirstName.value;
   const lastName = txtLastName.value;
   const type = typeSelect.value;
+  var vacation = 0;
 
   var fields = [email, password, confirmPassword, firstName, lastName];
 
+  if (type == "Manager"){
+      vacation = 25;
+  }
+  else{
+        vacation = 10;
+  }
+    
   if (areNull(fields)) {
     alertMsg.innerHTML = "<strong>Stop!</strong> One or more of your fields are empty.";
     $('#loginAlert').show();
@@ -104,7 +112,7 @@ btnSubmit.addEventListener('click', e => {
       firstName : firstName,
       lastName : lastName,
       type : type,
-      vacation: 0
+      vacation: vacation
     });
   }).catch(e => {
     console.log(e.message);
