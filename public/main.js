@@ -140,6 +140,7 @@ firebase.auth().onAuthStateChanged(user => {
   }
 });
 
+
 // Log out event
 btnLogOut.addEventListener('click', e => {
   firebase.auth().signOut();
@@ -157,14 +158,53 @@ employeesBtn.addEventListener('click', e => {
   document.getElementById("employeeSidenav").style.width = "250px";
   // Loop through "Employee" to get data of every Employee in the data base
   var index = 1;
-  var query = firebase.database().ref("Employee/");
+  var query = firebase.database().ref("Employee/");    
   query.once("value")
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       // key will be "ada" the first time and "alan" the second time
-      var key = childSnapshot.key;
-      var childData = childSnapshot.val();
-      document.getElementById("employee"+index.toString()).innerText = childData["firstName"];
+     var key = childSnapshot.key;
+     var childData = childSnapshot.val();
+     let totalHours = 0;
+	 let totalDev = 0;
+	 let totalMeeting = 0;
+	 let totalOther = 0;
+	 var today = new Date();
+	 var mondayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+1).valueOf();
+	 var sundayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+8).valueOf()-1;
+
+     let dbEvents = database.ref().child('Events/'+key);
+	 // Read the Events from Firebase
+     dbEvents.on('value', snapshot => {
+	 //console.log(snapshot.val());
+	 
+	 snapshot.forEach(function (childSnapshot) {
+	 var key = childSnapshot.key;
+
+	 let start = childSnapshot.child("start_date").val();
+	 let end = childSnapshot.child("end_date").val();
+	 let duration = (end-start)/(1000*60*60);
+	 let type = childSnapshot.child("type").val();
+
+	 //console.log(duration);
+	 if (start >= mondayOfWeek && start <= sundayOfWeek){
+	  totalHours = totalHours + duration;
+	  if (type === '1'){
+		totalDev = totalDev+duration;
+	  }
+	  else if (type == '2'){
+		totalMeeting = totalMeeting+duration;
+	  }
+	  else{
+		totalOther=totalOther+duration;
+	  }
+	 }
+         
+	 });
+	 
+	 });
+  
+      document.getElementById("employee"+index.toString()).innerText = childData["firstName"] +" " +childData["lastName"] + "\n ("+ totalHours.toFixed(1) +" hours worked)";
       index++;
     });
   });
@@ -177,7 +217,9 @@ projectsBtn.addEventListener('click', e => {
   document.getElementById("settingSidenav").style.width = "0";
   document.getElementById("employeeSidenav").style.width = "0";
 
-  //open project side menu
+ 
+    
+    //open project side menu
   document.getElementById("projectSidenav").style.width = "250px";
   var index = 1;
   var query = firebase.database().ref("Project/");
@@ -324,7 +366,7 @@ var hours = new RadialProgressChart('.hours', {
   round: false,
   series: [{
     value: 0,
-    color: ['#7CFC00','red']
+    color: ['red','#7CFC00']
   }],
   center: function(d) {
             return d.toFixed(2) + ' HOURS'
