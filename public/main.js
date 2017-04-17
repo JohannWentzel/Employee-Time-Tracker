@@ -27,6 +27,8 @@ const NotificationsBtn = document.getElementById('NotificationsBtn');
 const addProjectBtn = document.getElementById('addProjectBtn');
 const saveProject = document.getElementById('saveProject');
 
+var vacationDays = 0;
+
 // Check for user authentication
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
@@ -45,6 +47,7 @@ firebase.auth().onAuthStateChanged(user => {
       type = snapshot.child("type").val();
       email = snapshot.child("email").val();
       vacation1 = snapshot.child("vacation").val();
+      vacationDays = snapshot.child("vacation").val();
       vacation.update(vacation1)
     });
     //console.log(UID);
@@ -72,6 +75,7 @@ firebase.auth().onAuthStateChanged(user => {
       let totalDev = 0;
       let totalMeeting = 0;
       let totalOther = 0;
+      let totalVacation = vacationDays;
       var today = new Date();
       var mondayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+1).valueOf();
       var sundayOfWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - today.getDay()+8).valueOf()-1;
@@ -96,11 +100,15 @@ firebase.auth().onAuthStateChanged(user => {
           else{
             totalOther=totalOther+duration;
           }
+            if (type == '4'){
+                totalVacation = totalVacation - duration/8;
+            }
         }
       });
       scheduler.firebase(dbEvents); // Set events to the scheduler
       hours.update(totalHours);
-      hoursByType.update([totalOther,totalMeeting,totalDev])
+      hoursByType.update([totalOther,totalMeeting,totalDev]);
+      vacation.update(totalVacation);
     });
 
     // Display navbar if the user is a Manager
@@ -379,7 +387,7 @@ var vacation = new RadialProgressChart('.vacation', {
     width: 20,
     gap: 2
   },
-  max: 15,
+  max: 25,
   round: false,
   series: [{
     value: 0,
