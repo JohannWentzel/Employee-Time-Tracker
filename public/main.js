@@ -26,6 +26,8 @@ const sendBtn = document.getElementById('sendBtn');
 const NotificationsBtn = document.getElementById('NotificationsBtn');
 const addProjectBtn = document.getElementById('addProjectBtn');
 const saveProject = document.getElementById('saveProject');
+const VacationManagement = document.getElementById('VacationManagement');
+const setVacation = document.getElementById('setVacation');
 
 var vacationDays = 0;
 
@@ -278,6 +280,108 @@ function closeSideMenu() {
   document.getElementById("settingSidenav").style.width = "0";
 }
 
+
+VacationManagement.addEventListener('click', e => {
+    var query = firebase.database().ref("Employee/").orderByKey();
+    query.once("value")
+        .then(function(snapshot) {
+            html = '';
+            snapshot.forEach(function(childSnapshot) {
+                // key will be "ada" the first time and "alan" the second time
+                var key = childSnapshot.key;
+                var childData = childSnapshot.val();
+                let employee_first = childData["firstName"];
+                let employee_last = childData["lastName"];
+                let type = childData["type"];
+                if (type != "Manager"){
+                    html += "<option>" + employee_first + " " + employee_last + "</option>";
+                }
+
+            });
+            document.getElementById('vacation_employee').innerHTML = html;
+        });
+
+
+    $('#VacationModal').appendTo("body");
+
+
+
+});
+
+function updateVacDays() {
+    let a = document.getElementById("vacation_employee");
+    let recipient = a.options[a.selectedIndex].value;
+    let days=0;
+    var query = firebase.database().ref("Employee/").orderByKey();
+    query.once("value")
+        .then(function(snapshot) {
+            snapshot.forEach(function(childSnapshot) {
+                // key will be "ada" the first time and "alan" the second time
+                var key = childSnapshot.key;
+                var childData = childSnapshot.val();
+                let employee_first = childData["firstName"];
+                let employee_last = childData["lastName"];
+
+                let full = employee_first+" "+employee_last;
+                if (full === recipient){
+                    firebase.database().ref("Employee/"+key+"/vacation").on('value',function (snapshot) {
+                      console.log(snapshot.val());
+                      document.getElementById("vac_days").value = snapshot.val().toString();
+
+                    });
+
+
+                }
+            });
+
+        });
+}
+
+setVacation.addEventListener('click', e => {
+    let a = document.getElementById("vacation_employee");
+    let recipient = a.options[a.selectedIndex].value;
+    days = document.getElementById("vac_days").value;
+
+        //get uid of the recipient
+        var query = firebase.database().ref("Employee/").orderByKey();
+        query.once("value")
+            .then(function(snapshot) {
+                snapshot.forEach(function(childSnapshot) {
+                    // key will be "ada" the first time and "alan" the second time
+                    var key = childSnapshot.key;
+                    var childData = childSnapshot.val();
+                    let employee_first = childData["firstName"];
+                    let employee_last = childData["lastName"];
+                    let full = employee_first+" "+employee_last;
+                    if (full === recipient){
+                        firebase.database().ref("Employee/"+key+"/vacation").set(days);
+                    }
+                });
+
+            });
+
+
+    document.getElementById("vac_days").value = "0";
+    $('#VacationModal').modal('hide');
+});
+
+$(document).on('click', '.number-spinner button', function () {
+    var btn = $(this),
+        oldValue = btn.closest('.number-spinner').find('input').val().trim(),
+        newVal = 0;
+
+    if (btn.attr('data-dir') == 'up') {
+        newVal = parseInt(oldValue) + 1;
+    } else {
+        if (oldValue > 0) {
+            newVal = parseInt(oldValue) - 1;
+        } else {
+            newVal = 0;
+        }
+    }
+    btn.closest('.number-spinner').find('input').val(newVal);
+});
+
 projectManagementBtn.addEventListener('click', e => {
     $('#noteModal').modal('hide');
   var query = firebase.database().ref("Employee/").orderByKey();
@@ -300,6 +404,10 @@ projectManagementBtn.addEventListener('click', e => {
 $('#NotificationsModal').appendTo("body");
 });
 
+
+
+
+
 sendBtn.addEventListener('click', e => {
   let a = document.getElementById("recipient");
   let recipient = a.options[a.selectedIndex].value;
@@ -320,20 +428,9 @@ sendBtn.addEventListener('click', e => {
             firebase.database().ref("Notification/"+key).push(msg);
           }
         });
-
-    snapshot.forEach(function(childSnapshot) {
-      // key will be "ada" the first time and "alan" the second time
-      var key = childSnapshot.key;
-      var childData = childSnapshot.val();
-      let employee_first = childData["firstName"];
-      let employee_last = childData["lastName"];
-      let full = employee_first + " " + employee_last;
-      if (full === recipient){
-        firebase.database().ref("Notification/"+key).push(msg);
-      }
-    });
   });
   }
+
 document.getElementById("message-text").value = "";
 $('#NotificationsModal').modal('hide');
 });

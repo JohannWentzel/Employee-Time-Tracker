@@ -67,8 +67,47 @@
       <button type="button" class="btn btn-primary settingsBtn" data-toggle="modal" data-target="#AddProjectModal" id="addProjectBtn">
         Add a Project
       </button>
+      <button type="button" class="btn btn-primary settingsBtn" data-toggle="modal" data-target="#VacationModal" id="VacationManagement">
+        Manage Vacation
+      </button>
 
       <!-- Modal -->
+      <div class="modal fade" id="VacationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="VacationTitle">Manage Employee Vacation Days</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="vacation_employee">Select Employee:</label>
+                  <select class="form-control" id="vacation_employee" onchange="updateVacDays()"></select>
+                </div>
+                <label for="vac_toggle">Vacation Days:</label>
+                      <div class="input-group number-spinner" id="vac_toggle">
+				<span class="input-group-btn">
+					<button class="btn btn-default" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+				</span>
+                        <input type="text" class="form-control text-center" id="vac_days" value="1">
+                        <span class="input-group-btn">
+					<button class="btn btn-default" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+				</span>
+                      </div>
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="setVacation">Set</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="modal fade" id="NotificationsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
