@@ -284,10 +284,11 @@ function closeSideMenu() {
 
 
 VacationManagement.addEventListener('click', e => {
+
     var query = firebase.database().ref("Employee/").orderByKey();
     query.once("value")
         .then(function(snapshot) {
-            html = '';
+            html = '<option></option>';
             snapshot.forEach(function(childSnapshot) {
                 // key will be "ada" the first time and "alan" the second time
                 var key = childSnapshot.key;
@@ -305,6 +306,7 @@ VacationManagement.addEventListener('click', e => {
 
 
     $('#VacationModal').appendTo("body");
+
 
 
 
@@ -389,7 +391,7 @@ projectManagementBtn.addEventListener('click', e => {
   var query = firebase.database().ref("Employee/").orderByKey();
   query.once("value")
   .then(function(snapshot) {
-    html = '';
+    html = '<option></option>';
     snapshot.forEach(function(childSnapshot) {
       // key will be "ada" the first time and "alan" the second time
       var key = childSnapshot.key;
