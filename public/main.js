@@ -439,7 +439,7 @@ function init() {
   var type_opts = [
   { key: 1, label: 'Development' },
   { key: 2, label: 'Meeting' },
-  { key: 3, label: 'Testing' }
+  { key: 3, label: 'Testing' },
   { key: 4, label: 'Vacation' }
   ];
 
