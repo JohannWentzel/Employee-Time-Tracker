@@ -345,26 +345,26 @@ setVacation.addEventListener('click', e => {
     let a = document.getElementById("vacation_employee");
     let recipient = a.options[a.selectedIndex].value;
     days = document.getElementById("vac_days").value;
+        if(a.selectedIndex>0) {
+            //get uid of the recipient
+            var query = firebase.database().ref("Employee/").orderByKey();
+            query.once("value")
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        // key will be "ada" the first time and "alan" the second time
+                        var key = childSnapshot.key;
+                        var childData = childSnapshot.val();
+                        let employee_first = childData["firstName"];
+                        let employee_last = childData["lastName"];
+                        let full = employee_first + " " + employee_last;
+                        if (full === recipient) {
+                            firebase.database().ref("Employee/" + key + "/vacation").set(days);
+                        }
+                    });
 
-        //get uid of the recipient
-        var query = firebase.database().ref("Employee/").orderByKey();
-        query.once("value")
-            .then(function(snapshot) {
-                snapshot.forEach(function(childSnapshot) {
-                    // key will be "ada" the first time and "alan" the second time
-                    var key = childSnapshot.key;
-                    var childData = childSnapshot.val();
-                    let employee_first = childData["firstName"];
-                    let employee_last = childData["lastName"];
-                    let full = employee_first+" "+employee_last;
-                    if (full === recipient){
-                        firebase.database().ref("Employee/"+key+"/vacation").set(days);
-                    }
                 });
 
-            });
-
-
+        }
     document.getElementById("vac_days").value = "0";
     $('#VacationModal').modal('hide');
 });
@@ -416,7 +416,7 @@ sendBtn.addEventListener('click', e => {
   let a = document.getElementById("recipient");
   let recipient = a.options[a.selectedIndex].value;
   msg = document.getElementById("message-text").value;
-  if(msg.length > 0){
+  if(msg.length > 0 && a.selectedIndex > 0){
   //get uid of the recipient
   var query = firebase.database().ref("Employee/").orderByKey();
   query.once("value")
