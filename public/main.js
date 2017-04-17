@@ -503,7 +503,7 @@ var vacation = new RadialProgressChart('.vacation', {
   max: 25,
   round: false,
   series: [{
-    value: 4,
+    value: 0,
     color: ['#82CAFF', '#151B54']
   }],
   center: function(d) {
