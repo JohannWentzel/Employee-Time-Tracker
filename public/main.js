@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(user => {
       email = snapshot.child("email").val();
       vacation1 = snapshot.child("vacation").val();
       vacationDays = snapshot.child("vacation").val();
-      vacation.update(vacation1)
+      vacation.update(parseInt(vacation1));
     });
     //console.log(UID);
     let dbNotes = database.ref().child('Notification/' + UID);
@@ -108,12 +108,13 @@ firebase.auth().onAuthStateChanged(user => {
           // note: currently counts all vacation you've EVER taken.
         if (type == '4'){
                 totalVacation = totalVacation - duration/8;
+                vacation.update(parseInt(totalVacation));
         }
       });
       scheduler.firebase(dbEvents); // Set events to the scheduler
       hours.update(totalHours);
       hoursByType.update([totalOther,totalMeeting,totalDev]);
-      vacation.update(totalVacation);
+
     });
 
     // Display navbar if the user is a Manager
@@ -502,7 +503,7 @@ var vacation = new RadialProgressChart('.vacation', {
   max: 25,
   round: false,
   series: [{
-    value: 0,
+    value: 4,
     color: ['#82CAFF', '#151B54']
   }],
   center: function(d) {
