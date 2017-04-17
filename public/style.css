@@ -11,6 +11,7 @@ a {
   color: #FFF;
 }
 
+
 .center-block() {
   display: block;
   margin-left: auto;
@@ -247,6 +248,13 @@ a {
   float: left;
 }
 
+#projectList li{
+   padding: 8px 8px 8px 32px;
+}
+
+#employeeList li{
+   padding: 8px 8px 8px 32px;
+}
 .settingsBtn{
   width:80%;
   margin:0 auto;

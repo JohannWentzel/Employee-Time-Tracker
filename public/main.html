@@ -38,27 +38,8 @@
         
     </div>
 
-    <div id="approvalSidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeSideMenu()">&times;</a>
-      <a href="#" id="2"></a>
-      <a href="#" id="3"></a>
-      <a href="#" id="4"></a>
-      <a href="#" id="5"></a>
-    </div>
 
-    <div id="settingSidenav" class="sidenav">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeSideMenu()">&times;</a>
-      <button type="deleteUserBtn" class="btn btn-primary settingsBtn" id="deleteBtn">Delete User</button>
-      <button type="addUserBtn" class="btn btn-primary settingsBtn" id="addUserBtn">Add User</button>
-      <!-- Button trigger modal -->
-
-      <button type="button" class="btn btn-primary settingsBtn" data-toggle="modal" data-target="#AddProjectModal" id="addProjectBtn">
-        Add a Project
-      </button>
-      <button type="button" class="btn btn-primary settingsBtn" data-toggle="modal" data-target="#VacationModal" id="VacationManagement">
-        Manage Vacation
-      </button>
-
+      <div id="main" >
       <!-- Modal -->
       <div class="modal fade" id="VacationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -145,12 +126,12 @@
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
-    </div>
+    
 
     <!-- Use any element to open the sidenav -->
     <!--  <span onclick="openNav()">open</span> -->
 
-    <div id="main" >
+    
       <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -164,8 +145,8 @@
             <ul class="nav navbar-nav" id="navbar-btns">
               <li><a href="#" id="projectsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-list"></span> Projects</a></li>
               <li><a href="#" id="employeesBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-user"></span> Employees</a></li>
-              <li><a href="#" id="approvalsBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-ok"></span> Approvals</a></li>
-              <li><a href="#" id="settingsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-wrench"></span> Settings</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#AddProjectModal" id="addProjectBtn" class="btn btn-custom-purp"><span class="glyphicon glyphicon-plus-sign"></span> Add Projects</a></li>
+              <li><a href="#" data-toggle="modal" data-target="#VacationModal" id="VacationManagement"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-plane"></span> Edit Employee Vacations</a></li>
               <li><a data-toggle="modal" href="#noteModal" id="NotificationsBtn"  class="btn btn-custom-purp"><span class="glyphicon glyphicon-envelope"></span> Messages <span id="note_badge" class="badge"></span></a></li>
               <div class="nav navbar-nav"id="topRight">
                 <span id="userEmail"></span>

@@ -19,8 +19,7 @@ const showUser = document.getElementById('userEmail');
 const navbar = document.getElementById('navbar');
 const employeesBtn = document.getElementById('employeesBtn');
 const projectsBtn = document.getElementById('projectsBtn');
-const settingsBtn = document.getElementById('settingsBtn');
-const approvalsBtn = document.getElementById('approvalsBtn');
+
 const projectManagementBtn = document.getElementById('projectManagementBtn');
 const sendBtn = document.getElementById('sendBtn');
 const NotificationsBtn = document.getElementById('NotificationsBtn');
@@ -125,15 +124,15 @@ firebase.auth().onAuthStateChanged(user => {
       if(userType == "Manager"){
         employeesBtn.style.visibility = "visible";
         projectsBtn.style.visibility = "visible";
-        settingsBtn.style.visibility = "visible";
-        approvalsBtn.style.visibility = "visible";
+        addProjectBtn.style.visibility = "visible";
+        VacationManagement.style.visibility = "visible";
         projectManagementBtn.visibility = "visible";
       }
       else {
         employeesBtn.remove();
         projectsBtn.remove();
-        settingsBtn.remove();
-        approvalsBtn.remove();
+        addProjectBtn.remove();
+        VacationManagement.remove();
         projectManagementBtn.remove();
       }
 
@@ -165,8 +164,6 @@ btnLogOut.addEventListener('click', e => {
 employeesBtn.addEventListener('click', e => {
   //close other sidemenus
   document.getElementById("projectSidenav").style.width = "0";
-  document.getElementById("approvalSidenav").style.width = "0";
-  document.getElementById("settingSidenav").style.width = "0";
 
   // Displays a container with all employees in the database
   document.getElementById("employeeSidenav").style.width = "250px";
@@ -239,8 +236,7 @@ employeesBtn.addEventListener('click', e => {
 // Navbar projects
 projectsBtn.addEventListener('click', e => {
   //close other sidemenu opens
-  document.getElementById("approvalSidenav").style.width = "0";
-  document.getElementById("settingSidenav").style.width = "0";
+  
   document.getElementById("employeeSidenav").style.width = "0";
 
  
@@ -275,20 +271,10 @@ projectsBtn.addEventListener('click', e => {
 });
 
 // Navbar approvals
-approvalsBtn.addEventListener('click', e => {
-  //close other sidemenu open
-  document.getElementById("employeeSidenav").style.width = "0";
-  document.getElementById("projectSidenav").style.width = "0";
-  document.getElementById("settingSidenav").style.width = "0";
-  //open approval sidemenu
-  document.getElementById("approvalSidenav").style.width = "250px";
-  document.getElementById("1").innerText = "Approval1";
-  document.getElementById("2").innerText = "Approval2";
-  document.getElementById("3").innerText = "Approval3";
-});
+
 
 // Navbar Setting
-settingsBtn.addEventListener('click', e => {
+/*settingsBtn.addEventListener('click', e => {
   //close other sidemnu open
   document.getElementById("employeeSidenav").style.width = "0";
   document.getElementById("projectSidenav").style.width = "0";
@@ -300,12 +286,11 @@ settingsBtn.addEventListener('click', e => {
   document.getElementById("2").innerText = "Add User";
   document.getElementById("3").innerText = "Add Project";
 });
-
+*/
 function closeSideMenu() {
   document.getElementById("employeeSidenav").style.width = "0";
   document.getElementById("projectSidenav").style.width = "0";
-  document.getElementById("approvalSidenav").style.width = "0";
-  document.getElementById("settingSidenav").style.width = "0";
+
 }
 
 
