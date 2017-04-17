@@ -102,9 +102,11 @@ firebase.auth().onAuthStateChanged(user => {
           else{
             totalOther=totalOther+duration;
           }
-            if (type == '4'){
+            
+        }
+          // note: currently counts all vacation you've EVER taken.
+        if (type == '4'){
                 totalVacation = totalVacation - duration/8;
-            }
         }
       });
       scheduler.firebase(dbEvents); // Set events to the scheduler
@@ -523,7 +525,8 @@ function getProjects() {
 
 // Initialize the DHTMLX scheduler
 function init() {
-  scheduler.config.start_on_monday = false; // Weeks start on Sunday
+  scheduler.config.start_on_monday = false; // Weeks start on Sunday 
+  scheduler.config.scroll_hour = 8;
   scheduler.init('scheduler_here', new Date(), "week");
   scheduler.locale.labels.section_text = 'Description';
   scheduler.locale.labels.section_projects = 'Projects';
